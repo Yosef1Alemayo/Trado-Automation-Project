@@ -49,4 +49,4 @@ class Upload_New_Product_Page:
         return self.driver.find_element(By.CSS_SELECTOR, self.validationFailed).get_attribute('innerText')
 
     def enter_the_field_message(self):
-        return self.driver.find_element(By.CSS_SELECTOR, self.fieldError).text
+        return self.driver.find_element(By.CSS_SELECTOR, self.fieldError).get_attribute('innerText')
