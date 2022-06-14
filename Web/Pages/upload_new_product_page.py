@@ -11,7 +11,8 @@ class Upload_New_Product_Page:
         self.Inputs = Upload_New_Product_Locators.NEW_PRODUCT_FIELDS  # 8 Inputs
         self.addNewProductSection = Upload_New_Product_Locators.ADD_NEW_PRODUCT_SECTION  # Navigate to Add Product
         self.addNewProductButton = Upload_New_Product_Locators.ADD_NEW_PRODUCT_BUTTON  # Add Button
-        self.validationFailed = Upload_New_Product_Locators.STORE_VALIDATION_FAILED
+        self.validationFailed = Upload_New_Product_Locators.STORE_VALIDATION_FAILED  # Error Message (No Store)
+        self.fieldError = Upload_New_Product_Locators.FILL_THE_FIELD  # Error Message for The Fields
 
     def click_add_new_product_section(self):
         utils = Utils(self.driver)
@@ -46,3 +47,6 @@ class Upload_New_Product_Page:
     def store_validation_failed_message(self):
         WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.CSS_SELECTOR, self.validationFailed)))
         return self.driver.find_element(By.CSS_SELECTOR, self.validationFailed).get_attribute('innerText')
+
+    def enter_the_field_message(self):
+        return self.driver.find_element(By.CSS_SELECTOR, self.fieldError).text

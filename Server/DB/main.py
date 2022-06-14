@@ -13,5 +13,5 @@ def query_for_login_code():
 def query_for_products_details(product_name, key):
     collection = user.db_and_collection('products')
     query = collection.find_one({'name': f'{product_name}'})
-    barcode = query[f'{key}']
-    return barcode
+    value = query[f'{key}']
+    return value

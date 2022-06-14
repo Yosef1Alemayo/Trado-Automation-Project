@@ -115,8 +115,20 @@ class Test_Upload_New_Product(Precondition_Chrome):
         upload_product.click_add_new_product_button()
         utils.validation(upload_product.js_messages_for_the_fields(7), 'Please fill out this field.')
 
-    def test1(self, login_correctly):
-        pass
+    def test_upload_product_incorrectly_when_all_the_field_are_null(self, login_correctly):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_New_Product_Page(driver)
 
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(['', '', '', '', '', '', '', ''])
+        upload_product.click_add_new_product_button()
+        utils.validation(upload_product.js_messages_for_the_fields(1), 'Please fill out this field.')
 
-
+    def test1(self):
+        driver = self.driver
+        u = Upload_New_Product_Page(driver)
+        u.click_add_new_product_section()
+        u.enter_data_to_inputs(['', '', '', '', '', '', '', ''])
+        u.click_add_new_product_button()
+        print(u.enter_the_field_message())
