@@ -10,9 +10,8 @@ def query_for_login_code():
     sms_code = query['loginCode']
     return sms_code
 
-def query_for_products_details():
+def query_for_products_details(product_name, key):
     collection = user.db_and_collection('products')
-    query = collection.find_one({'name': 'קורונה'})
-    barcode = query['barcode']
+    query = collection.find_one({'name': f'{product_name}'})
+    barcode = query[f'{key}']
     return barcode
-
