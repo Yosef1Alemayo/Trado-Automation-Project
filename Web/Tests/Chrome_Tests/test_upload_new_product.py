@@ -129,6 +129,6 @@ class Test_Upload_New_Product(Precondition_Chrome):
         driver = self.driver
         u = Upload_New_Product_Page(driver)
         u.click_add_new_product_section()
-        u.enter_data_to_inputs(['', '', '2', '', '', '', '', ''])
+        u.enter_data_to_inputs(['', '', '', '', '', '', '', ''])
         u.click_add_new_product_button()
         print(u.enter_the_field_message())
