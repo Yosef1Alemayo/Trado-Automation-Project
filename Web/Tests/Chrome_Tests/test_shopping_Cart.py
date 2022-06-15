@@ -1,47 +1,61 @@
-import time
-from Server.DB.main import query_for_products_details
+import allure
 import pytest
-from Web.Utils.PreConditions.pre_condition import Precondition_Chrome
+from Server.DB.main import query_for_products_details
+from Server.DB.main import query_for_products_with_2_keys
+from Web.Utils.PreConditions.precondition_tsiona import Pre_Condition_Tsiona
 from Web.Utils.utils import Utils
 from Web.Pages.shopping_Cart_Page import ShoppingCartPage
 
 
 @pytest.mark.usefixtures('login_correctly')
-class TestShoppingCart(Precondition_Chrome):
+class TestShoppingCart(Pre_Condition_Tsiona):
 
-    def test_adding_product_to_cart_properly(self, login_correctly):
+    @allure.description('Verify the product details in web matching to details in DB')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_verify_products_details_in_DB(self, login_correctly):
+
+        ''' Verify the product details in web matching to details in DB'''
         driver = self.driver
         utils = Utils(driver)
         cart = ShoppingCartPage(driver)
         cart.click_on_canabis_page()
         cart.click_on_product_from_list(4)
 
-        # Getting product details:
+        # #Verify name:
+        # name = cart.get_product_name()
+        # N = query_for_products_details("אקדיה",'name')
+        # utils.validation(N,name)               ####PASSED
 
-        #Verify name:
-        name = cart.get_product_name()
-        N = query_for_products_details("אקדיה",'name')
-        utils.validation(N,name)               ####PASSED
+        #Verify price per unit:
+        price = cart.get_product_price_per_unit()
+        P = query_for_products_details("אקדיה" ,'price')
+        utils.validation(P,price)
 
-        #Verify price per carton:
-        # price = cart.get_product_price_per_carton() ### יש בעיה ה-SPLIT חוזר עם גרשיים
-        # P = query_for_products_details("אקדיה" ,'price')
-        # utils.validation(P,price)  #
-        # print(price)
-        # print(P)
+        # #Verify units in carton:
+        # units = cart.get_unit_in_carton()
+        # U = query_for_products_with_2_keys("אקדיה",'units','unitsInCarton')
+        # utils.validation(U,units)              ####PASSED
 
-        #Verify units in carton :
-        units = cart.get_unit_in_carton()
-        U = query_for_products_details("אקדיה",'units.unitsInCarton') ####חוזר עם כמה ערכים
-        utils.validation(U,units)
-        print(U)
+#לא תקין! צריך לשנות את החישוב של מחיר לקרטון -
+#מחיר לקרטון = מחיר ליחידהX מס יחידות בקרטון
+#לעשות פונקציה שמחשבת ולהשוות פה עם הנתון שחוזר מהאתר
+        # # Verify price per carton:
+        # price = cart.get_product_price_per_carton()   ###FAILED
 
-        #Verify barcode :
-        barcode = cart.get_product_barcode()
-        B = query_for_products_details("אקדיה","barcode")
-        utils.validation(B,barcode)          #### PASSDE
-        print(B)
-        print(barcode)
+        # #Verify barcode :
+        # barcode = cart.get_product_barcode()
+        # B = query_for_products_details("אקדיה","barcode")
+        # utils.validation(B,barcode)          #### PASSED
+
+        #Verify minmum order:
+        min = cart.get_minimum_order()
+        M = query_for_products_with_2_keys("אקדיה","units","minimumOrderCartonsCount")
+        utils.validation(M,min)                ####PASSED
+
+
+
+
+
 
 
         # #Adding product to cart:
