@@ -10,7 +10,6 @@ class Test_Upload_New_Product(Precondition_Chrome):
     @allure.description('Upload a product incorrectly when the user does not have a store')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_incorrectly_without_store(self, login_correctly):
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
         driver = self.driver
         utils = Utils(driver)
         upload_product = Upload_New_Product_Page(driver)
