@@ -15,3 +15,11 @@ def query_for_products_details(product_name, key):
     query = collection.find_one({'name': f'{product_name}'})
     value = query[f'{key}']
     return value
+
+def query_for_products_with_2_keys(prod_name, key, key2):
+    collection = user.db_and_collection('products')
+    query = collection.find_one({'name': prod_name})
+    value = query[key]
+    return value[key2]
+
+
