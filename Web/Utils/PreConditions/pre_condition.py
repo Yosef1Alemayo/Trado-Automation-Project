@@ -15,7 +15,7 @@ class Precondition_Chrome(Base_Chrome):
         driver.find_element(By.XPATH, PreCondition_Locators.COCKTAILS).click()
         driver.find_element(By.CSS_SELECTOR, PreCondition_Locators.SAVE_BUTTON).click()
         driver.find_element(By.XPATH, PreCondition_Locators.LOGIN_SECTION).click()
-        driver.find_element(By.XPATH, PreCondition_Locators.PHONE_FIELD).send_keys('0525393079')
+        driver.find_element(By.XPATH, PreCondition_Locators.PHONE_FIELD).send_keys('0526050731')
         connect = driver.find_element(By.CSS_SELECTOR, PreCondition_Locators.CONNECT_BUTTON)
         connect.click()
         sms_code = query_for_login_code()
@@ -32,7 +32,7 @@ class Precondition_Edge(Base_Edge):
         driver = self.driver
         driver.find_element(By.CSS_SELECTOR, PreCondition_Locators.SAVE_BUTTON).click()
         driver.find_element(By.XPATH, PreCondition_Locators.LOGIN_SECTION).click()
-        driver.find_element(By.XPATH, PreCondition_Locators.PHONE_FIELD).send_keys('0525393079')
+        driver.find_element(By.XPATH, PreCondition_Locators.PHONE_FIELD).send_keys('0526050731')
         connect = driver.find_element(By.CSS_SELECTOR, PreCondition_Locators.CONNECT_BUTTON)
         connect.click()
         sms_code = query_for_login_code()

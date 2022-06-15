@@ -6,7 +6,7 @@ user = DataBase(string_connection)
 
 def query_for_login_code():
     collection = user.db_and_collection('users')
-    query = collection.find_one({'phone': '0525393079'})
+    query = collection.find_one({'phone': '0526050731'})
     sms_code = query['loginCode']
     return sms_code
 
