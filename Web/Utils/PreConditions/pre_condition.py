@@ -23,7 +23,6 @@ class Precondition_Chrome(Base_Chrome):
         driver.find_element(By.XPATH, PreCondition_Locators.PASSWORD_FIELD).send_keys(sms_code)
         time.sleep(3)
         driver.find_element(By.CSS_SELECTOR, PreCondition_Locators.CONNECT_BUTTON).click()
-        time.sleep(5)
 
 @pytest.mark.usefixtures('set_up_edge')
 class Precondition_Edge(Base_Edge):
