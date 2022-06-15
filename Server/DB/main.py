@@ -4,9 +4,9 @@ from Server.DB.mongodb import DataBase
 string_connection = 'mongodb+srv://test_dev:AtmNf7Iz5BIs0dzc@cluster0.qnr3p.mongodb.net/?retryWrites=true&w=majority'
 user = DataBase(string_connection)
 
-def query_for_login_code():
+def query_for_login_code(phone_number):
     collection = user.db_and_collection('users')
-    query = collection.find_one({'phone': '0526050731'})
+    query = collection.find_one({'phone': f'{phone_number}'})
     sms_code = query['loginCode']
     return sms_code
 
