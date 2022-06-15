@@ -1,5 +1,6 @@
 class Upload_New_Product_Locators:
     # CSS:
+    ADD_PRODUCT_PAGE = 'div[class="addProduct_page"]'
     NEW_PRODUCT_FIELDS = 'input[class="add_product_page_form_item"]'
     ADD_NEW_PRODUCT_BUTTON = 'input[class="form_submitBtn"]'
     # XPATH:

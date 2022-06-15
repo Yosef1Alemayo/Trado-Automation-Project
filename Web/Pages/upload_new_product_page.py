@@ -8,6 +8,7 @@ class Upload_New_Product_Page:
 
     def __init__(self, driver):
         self.driver = driver
+        self.addProductPage = Upload_New_Product_Locators.ADD_PRODUCT_PAGE  # Add Project Page Class
         self.Inputs = Upload_New_Product_Locators.NEW_PRODUCT_FIELDS  # 8 Inputs
         self.addNewProductSection = Upload_New_Product_Locators.ADD_NEW_PRODUCT_SECTION  # Navigate to Add Product
         self.addNewProductButton = Upload_New_Product_Locators.ADD_NEW_PRODUCT_BUTTON  # Add Button
@@ -15,10 +16,11 @@ class Upload_New_Product_Page:
         self.fieldError = Upload_New_Product_Locators.FILL_THE_FIELD  # Error Message for The Fields
 
     def click_add_new_product_section(self):
-        utils = Utils(self.driver)
+        wait = WebDriverWait(self.driver, 20)
         section = self.driver.find_element(By.XPATH, self.addNewProductSection)
         section.click()
-        utils.validation(section.get_attribute('innerText'), "+ העלאת מוצר חדש")
+        div = self.driver.find_element(By.CSS_SELECTOR, self.addProductPage)
+        wait.until(EC.visibility_of(div))
 
     def inputs_fields(self):
         utils = Utils(self.driver)
