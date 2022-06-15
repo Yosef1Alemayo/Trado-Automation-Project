@@ -42,7 +42,7 @@ class Upload_New_Product_Page:
                 utils.validation(fields[field].get_attribute('value'), data[field])
 
     """ Messages: """
-    def js_messages_for_the_fields(self, num):
+    def js_messages_for_all_the_fields(self, num):
         fields = self.inputs_fields()
         return fields[num].get_attribute('validationMessage')
 
@@ -50,5 +50,6 @@ class Upload_New_Product_Page:
         WebDriverWait(self.driver, 20).until(EC.visibility_of_element_located((By.CSS_SELECTOR, self.validationFailed)))
         return self.driver.find_element(By.CSS_SELECTOR, self.validationFailed).get_attribute('innerText')
 
-    def enter_the_field_message(self):
-        return self.driver.find_element(By.CSS_SELECTOR, self.fieldError).get_attribute('innerText')
+    def enter_the_field_message(self, num):
+        messages = self.driver.find_elements(By.CSS_SELECTOR, self.fieldError)
+        return messages[num].get_attribute('innerText')
