@@ -15,12 +15,14 @@ class ShoppingCartLocators:
 
     #products description:
     product_name = "//div[1]/div[1]/div[2]/div[1]/h1"
-    product_price= "//div[2]/div[1]/div[1]/div[1]/div[1]/span[1]"
+    product_price_per_carton = "//div[1]/div[1]/div[2]/div[3]/div[1]/div[3]/div[1]"
+    product_price_per_unit = "//div[2]/div[1]/div[1]/div[1]/div[1]/span[1]"
+    unit_in_carton = "//div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[2]/div[1]"
+    product_barcode = "//div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]"
 
-
-    units_in_stuck = "//div[1]/div[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]"
 
     #shopping cart
+    count_prod_in_cart = "//div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]"
     prod_name_in_cart = " //div[1]/a[1]/div[1]/div[2]/div[1]"
     prod_price_in_cart = "//div[3]/div[1]/div[1]/div[1]/div[1]/span[1]"
     quantity_per_product = "//div[2]/div[3]/div[1]/div[1]/div[1]/input[1]"    # Per Product

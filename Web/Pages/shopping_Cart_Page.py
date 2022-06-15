@@ -9,17 +9,23 @@ class ShoppingCartPage():
         self.driver = driver
         self.canabis_page = ShoppingCartLocators.canbis_page
         self.canabis_product_list = ShoppingCartLocators.canabis_product_list
-        self.products_list_sales = ShoppingCartLocators.sales_product_list
+
         self.plus_button = ShoppingCartLocators.plus_button
         self.minus_button = ShoppingCartLocators.minus_button
         self.delete_product_from_cart = ShoppingCartLocators.delete_product_from_cart
         self.empty_the_cart = ShoppingCartLocators.empty_the_cart
+        self.payment_button = ShoppingCartLocators.payment_button
+
         self.product_name = ShoppingCartLocators.product_name
-        self.product_price = ShoppingCartLocators.product_price
+        self.product_price_per_carton = ShoppingCartLocators.product_price_per_carton
+        self.product_price_per_unit = ShoppingCartLocators.product_price_per_unit
+        self.unit_in_carton = ShoppingCartLocators.unit_in_carton
+        self.product_barcode = ShoppingCartLocators.product_barcode
+
+
         self.prod_name_in_cart = ShoppingCartLocators.prod_name_in_cart
         self.prod_price_in_cart = ShoppingCartLocators.prod_price_in_cart
         self.quantity_per_product = ShoppingCartLocators.quantity_per_product
-        self.payment_button = ShoppingCartLocators.payment_button
 
 
     def click_on_canabis_page(self):
@@ -28,14 +34,11 @@ class ShoppingCartPage():
     def get_canabis_product_list(self):
         prodList= self.driver.find_elements(By.XPATH,self.canabis_product_list)
         return prodList
+        # print(len(prodList))
 
     def click_on_product_from_list(self, num):
         prodList = self.get_canabis_product_list()
         prodList[num].click()
-
-    # def get_sales_products_list(self):
-    #     prodList =self.driver.find_elements(By.XPATH,self.products_list_sales)
-    #     return prodList
 
 ### Get product details: for assertion ###
     def get_product_name(self):
@@ -43,10 +46,19 @@ class ShoppingCartPage():
         return prodName
         # print(prodName)
 
-    def get_product_price(self):
-        prodPrice = self.driver.find_element(By.XPATH,self.product_price).get_attribute("innerText")
-        return prodPrice
-        # print(prodPrice)
+    def get_product_price_per_carton(self):
+        prodPrice = self.driver.find_element(By.XPATH,self.product_price_per_carton).get_attribute("innerText").split("/")
+        return prodPrice[0]
+        # print(prodPrice[0])
+
+    def get_unit_in_carton(self):
+        unitInCarton = self.driver.find_element(By.XPATH,self.unit_in_carton).get_attribute("innerText").split("י")
+        return unitInCarton[0]
+
+    def get_product_barcode(self):
+        barcode = self.driver.find_element(By.XPATH,self.product_barcode).get_attribute("innerText").split(": ")
+        return barcode[1]
+        # print(barcode[1])
 
     #Adding prod(1 per click)
     def click_on_plus_button(self):
