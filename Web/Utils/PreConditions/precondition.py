@@ -13,7 +13,10 @@ class Pre_Condition(Base_Chrome):
     def click_restaurants(self):
         wait = WebDriverWait(self.driver, 20)
         wait.until(EC.presence_of_element_located((By.XPATH, PreCondition_Locators.RESTAURANTS)))
-        self.driver.find_element(By.XPATH, PreCondition_Locators.RESTAURANTS).click()
+        if None:
+            self.driver.refresh()
+        else:
+            self.driver.find_element(By.XPATH, PreCondition_Locators.RESTAURANTS).click()
 
     def click_cocktails(self):
         wait = WebDriverWait(self.driver, 20)

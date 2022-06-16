@@ -14,7 +14,7 @@ class Upload_New_Product_Page:
         self.addNewProductSection = Upload_New_Product_Locators.ADD_NEW_PRODUCT_SECTION  # Navigate to Add Product
         self.addNewProductButton = Upload_New_Product_Locators.ADD_NEW_PRODUCT_BUTTON  # Add Button
         self.validationFailed = Upload_New_Product_Locators.STORE_VALIDATION_FAILED  # Error Message (No Store)
-        self.fieldError = Upload_New_Product_Locators.FILL_THE_FIELD  # Error Message for The Fields
+        self.fieldError = Upload_New_Product_Locators.FILL_THE_FIELD  # Error Message for all The Fields
 
     def click_add_new_product_section(self):
         wait = WebDriverWait(self.driver, 20)
@@ -59,5 +59,9 @@ class Upload_New_Product_Page:
         return self.driver.find_element(By.CSS_SELECTOR, self.validationFailed).get_attribute('innerText')
 
     def enter_the_field_message(self, num):
-        messages = self.driver.find_elements(By.CSS_SELECTOR, self.fieldError)
+        messages = self.driver.find_elements(By.XPATH, self.fieldError)
         return messages[num].get_attribute('innerText')
+
+    def re(self):
+        a = self.driver.find_element(By.XPATH, 'div/div/div')
+        print(type(a))

@@ -7,5 +7,5 @@ class Upload_New_Product_Locators:
 
     # Messages
     STORE_VALIDATION_FAILED = 'div[class="form_message"]'
-    FILL_THE_FIELD = 'div[class="form_note "]'
+    FILL_THE_FIELD = "//form[1]/div[2]/div/div/div/div"
 
