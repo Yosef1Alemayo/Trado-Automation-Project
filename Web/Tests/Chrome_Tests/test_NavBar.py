@@ -12,16 +12,16 @@ class TestNavBer(Pre_Condition_Betty):
     @allure.description("Validates links opening correctly")
     def test_links(self, login_correctly):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validates links opening correctly"""
         driver = self.driver
         headers = NavBarPage(driver)
-        headers.clicking_links(NavBarLocators.header1, NavBarLocators.className1)
+        headers.clicking(NavBarLocators.header1,NavBarLocators.list2,NavBarLocators.list_txt2)
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.description("Validates menu buttons opening correctly")
     def test_menuButtons(self, login_correctly):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validates menu buttons opening correctly"""
         driver = self.driver
         headers = NavBarPage(driver)
-        headers.clicking_links(NavBarLocators.header2, NavBarLocators.className2)
+        headers.clicking(NavBarLocators.header2,NavBarLocators.list1,NavBarLocators.list_txt)

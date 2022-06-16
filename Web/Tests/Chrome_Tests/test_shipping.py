@@ -1,12 +1,11 @@
 import allure
 import pytest
 from Web.Pages.Shipping_Page import ShipPage
-from Web.Utils.PreConditions.pre_condition import Precondition_Chrome
-from Web.Utils.utils import Utils
+from Web.Utils.PreConditions.precondition_betty import Pre_Condition_Betty
 
 
 @pytest.mark.usefixtures('login_correctly')
-class TestShippingPage(Precondition_Chrome):
+class TestShippingPage(Pre_Condition_Betty):
 
     @allure.description('Validating moving into shipping page correctly')
     @allure.severity(allure.severity_level.CRITICAL)
