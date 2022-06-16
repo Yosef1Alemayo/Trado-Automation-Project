@@ -1,12 +1,12 @@
 import allure
 import pytest
 from Web.Pages.navBar_Page import NavBarPage
-from Web.Utils.PreConditions.precondition_tsiona import Pre_Condition_Tsiona
+from Web.Utils.PreConditions.precondition import Pre_Condition
 from Web.Locators.NavBar_Locators import NavBarLocators
 
 
-@pytest.mark.usefixtures('login')
-class TestNavBer(Pre_Condition_Tsiona):
+@pytest.mark.usefixtures('login_betty')
+class TestNavBer(Pre_Condition):
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.description("Validates links opening correctly")
@@ -28,11 +28,3 @@ class TestNavBer(Pre_Condition_Tsiona):
         headers = NavBarPage(driver)
         headers.clicking(NavBarLocators.header2, NavBarLocators.list1, NavBarLocators.list_txt)
 
-    def test1(self):
-        pass
-
-    def test2(self):
-        pass
-
-    def test3(self):
-        pass

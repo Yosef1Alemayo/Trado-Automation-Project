@@ -1,11 +1,11 @@
 import allure
 import pytest
 from Web.Pages.maxBussinesPages import MaxBussinesPage
-from Web.Utils.PreConditions.precondition_tsiona import Pre_Condition_Tsiona
+from Web.Utils.PreConditions.precondition import Pre_Condition
 
 
-@pytest.mark.usefixtures('login')
-class TestSigninMaxBussiness(Pre_Condition_Tsiona):
+@pytest.mark.usefixtures('login_betty')
+class TestSigninMaxBussiness(Pre_Condition):
 
     @allure.description('Validating creating new business account with valid details')
     @allure.severity(allure.severity_level.CRITICAL)

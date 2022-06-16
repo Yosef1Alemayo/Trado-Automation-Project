@@ -1,11 +1,11 @@
 import allure
 import pytest
 from Web.Pages.commonQuestion_Page import CommonQuePage
-from Web.Utils.PreConditions.precondition_tsiona import Pre_Condition_Tsiona
+from Web.Utils.PreConditions.precondition import Pre_Condition
 
 
-@pytest.mark.usefixtures('login')
-class Test(Pre_Condition_Tsiona):
+@pytest.mark.usefixtures('login_betty')
+class Test(Pre_Condition):
 
     @allure.description('Upload a product when the user does not have a store')
     @allure.severity(allure.severity_level.CRITICAL)
