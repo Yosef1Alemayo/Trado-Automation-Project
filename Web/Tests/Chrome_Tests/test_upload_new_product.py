@@ -140,3 +140,9 @@ class Test_Upload_New_Product(Pre_Condition):
         driver.implicitly_wait(5)
         utils.validation(upload_product.js_messages_for_all_the_fields(7), 'Please fill out this field.')
         utils.validation(upload_product.enter_the_field_message(7), "נא למלא שדה זה")
+
+
+@pytest.mark.usefixtures('login_yosef')
+class Test_Upload_New_Product1(Pre_Condition):
+    def test1(self):
+        pass
