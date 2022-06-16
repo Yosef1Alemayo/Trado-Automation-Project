@@ -1,5 +1,4 @@
 from selenium.webdriver.chrome.webdriver import WebDriver
-
 from Web.Utils.utils import Utils
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait

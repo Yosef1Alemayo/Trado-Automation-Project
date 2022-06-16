@@ -1,11 +1,11 @@
 import allure
 import pytest
 from Web.Pages.upload_new_product_page import Upload_New_Product_Page
-from Web.Utils.PreConditions.precondition_tsiona import Pre_Condition_Tsiona
+from Web.Utils.PreConditions.precondition import Pre_Condition
 from Web.Utils.utils import Utils
 
-@pytest.mark.usefixtures('login')
-class Test_Upload_New_Product(Pre_Condition_Tsiona):
+@pytest.mark.usefixtures('login_tsiona')
+class Test_Upload_New_Product(Pre_Condition):
 
     @allure.description('Upload a product incorrectly when the user does not have a store')
     @allure.severity(allure.severity_level.CRITICAL)
@@ -32,4 +32,16 @@ class Test_Upload_New_Product(Pre_Condition_Tsiona):
         pass
 
     def test21(self):
+        pass
+
+    def test31(self):
+        pass
+
+    def test32(self):
+        pass
+
+    def test311(self):
+        pass
+
+    def test321(self):
         pass

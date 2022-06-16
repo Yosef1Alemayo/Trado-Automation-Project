@@ -4,7 +4,7 @@ import allure
 import pytest
 from Server.DB.main import query_for_products_details
 from Server.DB.main import query_for_products_with_2_keys
-from Web.Utils.PreConditions.precondition_tsiona import Pre_Condition_Tsiona
+from Web.Utils.PreConditions.precondition import Pre_Condition_Tsiona
 from Web.Utils.utils import Utils
 from Web.Pages.shopping_Cart_Page import ShoppingCartPage
 
