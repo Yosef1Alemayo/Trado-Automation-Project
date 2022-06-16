@@ -8,7 +8,7 @@ from Web.Utils.PreConditions.pre_conditions_locators import PreCondition_Locator
 from Web.Base.ChromeBase.chrome_base import Base_Chrome
 from Web.Utils.utils import Utils
 
-class Pre_Condition_Tsiona(Base_Chrome):
+class Pre_Condition(Base_Chrome):
 
     def click_restaurants(self):
         wait = WebDriverWait(self.driver, 20)
@@ -48,22 +48,47 @@ class Pre_Condition_Tsiona(Base_Chrome):
             place.send_keys(digit)
             utils.validation(place.get_attribute('value'), digit)
 
+    @pytest.mark.usefixtures('set_up_chrome')
+    @pytest.fixture
+    def login_tsiona(self, set_up_chrome):
+        self.click_restaurants()
+        self.click_cocktails()
+        self.click_save_button()
+        self.click_login_section()
+        self.enter_phone('0526050731')
+        self.click_connect()
+        sms = query_for_login_code('0526050731')
+        sleep(5)
+        self.enter_sms_code(sms)
+        self.click_connect()
 
     @pytest.mark.usefixtures('set_up_chrome')
     @pytest.fixture
-    def login(self, set_up_chrome):
-            self.click_restaurants()
-            self.click_cocktails()
-            self.click_save_button()
-            self.click_login_section()
-            self.enter_phone('0526050731')
-            self.click_connect()
-            sms = query_for_login_code('0526050731')
-            sleep(5)
-            self.enter_sms_code(sms)
-            self.click_connect()
+    def login_yosef(self, set_up_chrome):
+        self.click_restaurants()
+        self.click_cocktails()
+        self.click_save_button()
+        self.click_login_section()
+        self.enter_phone('0525393079')
+        self.click_connect()
+        sms = query_for_login_code('0525393079')
+        sleep(5)
+        self.enter_sms_code(sms)
+        self.click_connect()
 
-
+    @pytest.mark.usefixtures('set_up_chrome')
+    @pytest.fixture
+    def login_betty(self, set_up_chrome):
+        self.click_restaurants()
+        self.click_cocktails()
+        self.click_save_button()
+        self.click_login_section()
+        self.enter_phone('0526050731')
+        self.click_connect()
+        sms = query_for_login_code('0526050731')
+        sleep(5)
+        self.enter_sms_code(sms)
+        self.click_connect()
 
 
 

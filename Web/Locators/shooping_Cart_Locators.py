@@ -21,8 +21,8 @@ class ShoppingCartLocators:
     product_barcode = "//div[2]/div[1]/div[1]/div[1]/div[1]/div[1]/div[1]/div[2]"
     minimum_order = "//div[1]/div[1]/div[1]/div[2]/div[3]/span[1]"
 
-
-    value = "//div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/input[1]"
+    #count each click on plus button:
+    count_adding_product = "//div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/input[1]"
 
 
     #shopping cart
