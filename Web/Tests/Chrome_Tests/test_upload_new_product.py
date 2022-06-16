@@ -1,15 +1,15 @@
 import allure
 import pytest
 from Web.Pages.upload_new_product_page import Upload_New_Product_Page
-from Web.Utils.PreConditions.pre_condition import Precondition_Chrome
+from Web.Utils.PreConditions.precondition_tsiona import Pre_Condition_Tsiona
 from Web.Utils.utils import Utils
 
-@pytest.mark.usefixtures('login_correctly')
-class Test_Upload_New_Product(Precondition_Chrome):
+@pytest.mark.usefixtures('login')
+class Test_Upload_New_Product(Pre_Condition_Tsiona):
 
     @allure.description('Upload a product incorrectly when the user does not have a store')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_upload_product_incorrectly_without_store(self, login_correctly):
+    def test_upload_product_incorrectly_without_store(self):
         driver = self.driver
         utils = Utils(driver)
         upload_product = Upload_New_Product_Page(driver)
@@ -21,3 +21,15 @@ class Test_Upload_New_Product(Precondition_Chrome):
         driver.implicitly_wait(5)
         utils.validation(upload_product.store_validation_failed_message(), "Store Validation Failed")
 
+
+    def test1(self):
+        pass
+
+    def test2(self):
+        pass
+
+    def test11(self):
+        pass
+
+    def test21(self):
+        pass

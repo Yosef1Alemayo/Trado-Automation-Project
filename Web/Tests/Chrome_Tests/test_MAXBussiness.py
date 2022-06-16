@@ -1,7 +1,7 @@
 import allure
 import pytest
 from Web.Pages.maxBussinesPages import MaxBussinesPage
-from Web.Utils.PreConditions.pre_condition import Precondition_Chrome
+from Web.Utils.PreConditions.pre_condition_yosef import Precondition_Chrome
 from Web.Utils.utils import Utils
 
 
