@@ -23,6 +23,8 @@ class ShoppingCartPage():
         self.product_barcode = ShoppingCartLocators.product_barcode
         self.minimum_order = ShoppingCartLocators.minimum_order
 
+        self.count_adding_product= ShoppingCartLocators.count_adding_product
+
         self.plus_button = ShoppingCartLocators.plus_button
         self.minus_button = ShoppingCartLocators.minus_button
         self.delete_product_from_cart = ShoppingCartLocators.delete_product_from_cart
@@ -166,53 +168,68 @@ class ShoppingCartPage():
         utils = Utils(self.driver)
         # cart = ShoppingCartPage(driver)
         cartonpriceInWeb = self.get_product_price_per_carton()
+        #get price from DB
         dbQuery= query_for_products_details("אקדיה", 'price')
-
-        unitPrice = self.get_product_price_per_unit()   #האם לחשב לפי מחיר בדאטה בייס או לפי המחיר באתר ????
-
+        #get price from web
+        unitPrice = self.get_product_price_per_unit()
+        #get_unit in carton from web
         unitIncarton = self.get_unit_in_carton()
 
-        calculation_from_web = self.calculating_carton_price(unitPrice,unitIncarton)
-        calculation_from_DB = self.calculating_carton_price(dbQuery,unitIncarton)
+        calculation_based_on_DB  = self.calculating_carton_price(dbQuery,unitIncarton)
+        calculation_based_on_web = self.calculating_carton_price(unitPrice,unitIncarton)
 
-
-        utils.validation(calculation_from_DB,calculation_from_web)    #unstable
-        print(calculation_from_web)
-        print(calculation_from_DB)
+        utils.validation(calculation_based_on_DB,calculation_based_on_web)    #unstable
+        print(calculation_based_on_DB)
+        print(calculation_based_on_web)
 
         #לעשות 2 טסטים ולהשוות בניהם:
 
+        # 4
+        # Verify price per carton:
+        # חישוב : מחיר לקרטון = מחיר ליחידה X מס' יחידות שיש בקרטון
+        # cartonpriceInWeb = cart.get_product_price_per_carton()
+        # unitPrice = cart.get_product_price_per_unit()
+        # unitIncarton = cart.get_unit_in_carton()
+        # expected_carton_price = cart.calculating_carton_price(unitPrice,unitIncarton)
+        # utils.validation(expected_carton_price,cartonpriceInWeb)    #unstable
 
+        # print("carton price from web: ",cartonpriceInWeb)
+        # print("unit price",unitPrice)
+        # print("unit in carton:",unitIncarton)
+        # print("calculation:",expected_carton_price)
 
+        # 5
+        # #Verify barcode :
+        # barcode = cart.get_product_barcode()
+        # B = query_for_products_details("אקדיה","barcode")
+        # utils.validation(B,barcode)          #### PASSED
 
+        # 6
+        # Verify minimum order:
+        # min = cart.get_minimum_order()
+        # M = query_for_products_with_2_keys("אקדיה","units","minimumOrderCartonsCount")
+        # utils.validation(M,min)                ####PASSED
 
 ####פונקציה אחת גדולה לכל האימות נתונים##
-    def verify_products_details(self):
-        driver = self.driver
-        utils = Utils(driver)
-        cart = ShoppingCartPage(driver)
-        #name:
-        name = cart.get_product_name()
-        dbQuery = query_for_products_details("אקדיה", 'name')
-        utils.validation(dbQuery, name)  ####PASSED
-        print(name)
-        print(dbQuery)
-        #price:
-        price = cart.get_product_price_per_unit()
-        dbQuery = query_for_products_details("אקדיה" ,'price')
-        utils.validation(dbQuery, price)       #Assertion Error טסט תקין - אבל נופל בגלל
-        print(price)
-        print(dbQuery)
-        #units:
-        units = cart.get_unit_in_carton()
-        dbQuery = query_for_products_with_2_keys("אקדיה", 'units', 'unitsInCarton')
-        utils.validation(dbQuery, units)  ####PASSED
-        print(units)
-        print(dbQuery)
-
-
-
-    def number(self):
-        WebDriverWait(self.driver, 20).until(EC.presence_of_element_located(By.XPATH, ShoppingCartPage.elem))
-        number = self.driver.find_element(By.XPATH, ShoppingCartPage.elem).get_attribute('value')
-        print(number)
+    # def verify_products_details(self):
+    #     driver = self.driver
+    #     utils = Utils(driver)
+    #     cart = ShoppingCartPage(driver)
+    #     #name:
+    #     name = cart.get_product_name()
+    #     dbQuery = query_for_products_details("אקדיה", 'name')
+    #     utils.validation(dbQuery, name)  ####PASSED
+    #     print(name)
+    #     print(dbQuery)
+    #     #price:
+    #     price = cart.get_product_price_per_unit()
+    #     dbQuery = query_for_products_details("אקדיה" ,'price')
+    #     utils.validation(dbQuery, price)       #Assertion Error טסט תקין - אבל נופל בגלל
+    #     print(price)
+    #     print(dbQuery)
+    #     #units:
+    #     units = cart.get_unit_in_carton()
+    #     dbQuery = query_for_products_with_2_keys("אקדיה", 'units', 'unitsInCarton')
+    #     utils.validation(dbQuery, units)  ####PASSED
+    #     print(units)
+    #     print(dbQuery)
