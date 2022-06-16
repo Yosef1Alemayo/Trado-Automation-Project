@@ -19,8 +19,10 @@ class NavBarPage(CommonQuePage):
 
         # clicking buttons
         for button, i, j in zip(buttons, xpath, txt):
+            sleep(3)
             button.click()
             x = self.assert_txt(i)
             util.validation(j, x)
             print(x, j)
+            sleep(3)
             self.driver.back()
