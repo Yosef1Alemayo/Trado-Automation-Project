@@ -25,4 +25,11 @@ def query_for_products_with_2_keys(prod_name, key, key2):
     value = query[key]
     return value[key2]
 
+def query_for_collection_len(collection_name):
+    string_connection = 'mongodb+srv://test_dev:AtmNf7Iz5BIs0dzc@cluster0.qnr3p.mongodb.net/?retryWrites=true&w=majority'
+    user = DataBase(string_connection)
+    collection = user.db_and_collection(collection_name)
+    query = collection.count_documents({})
+    return str(query)
+
 
