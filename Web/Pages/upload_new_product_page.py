@@ -61,3 +61,4 @@ class Upload_New_Product_Page:
     def enter_the_field_message(self, num):
         messages = self.driver.find_elements(By.XPATH, self.fieldError)
         return messages[num].get_attribute('innerText')
+

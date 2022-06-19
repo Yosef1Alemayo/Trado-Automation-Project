@@ -141,6 +141,25 @@ class Test_Upload_New_Product(Pre_Condition):
         utils.validation(upload_product.js_messages_for_all_the_fields(7), 'Please fill out this field.')
         utils.validation(upload_product.enter_the_field_message(7), "נא למלא שדה זה")
 
+    @allure.description('Upload a product incorrectly when the user does not have a store and email is Invalid')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_incorrectly_without_store(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_New_Product_Page(driver)
+
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(['1', 'Brands', '0555555555', 'a@trado.com', 'Brands.com', 'Tel-Aviv',
+                                             'Herzel', '1'])
+        upload_product.click_add_new_product_button()
+        driver.implicitly_wait(5)
+        utils.validation(upload_product.store_validation_failed_message(), "Store Validation Failed")
+
+
+
+
+
+
 
 @pytest.mark.usefixtures('login_yosef')
 class Test_Upload_New_Product1(Pre_Condition):
