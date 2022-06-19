@@ -29,16 +29,19 @@ class PageArea:
         # Util.validation(self.enter_first_name())
         time.sleep(3)
 
-    def enter_last_name(self, last_name):
-        self.driver.find_element(By.XPATH, self.last_name).clear()
-        self.driver.find_element(By.XPATH, self.last_name).send_keys(last_name)
+    def enter_last_name(self, last_name1):
+        utils = Utils(self.driver)
+        last_name = self.driver.find_element(By.XPATH, self.last_name)
+        last_name.clear()
+        last_name.send_keys(last_name1)
         time.sleep(3)
+        utils.validation(last_name.get_attribute('value'), last_name1)
 
     def enter_phone(self, phone):
-        # self.driver.find_element(By.XPATH, self.phone).clear()
+        self.driver.find_element(By.XPATH, self.phone).clear()
         self.driver.find_element(By.XPATH, self.phone).send_keys(phone)
-        Util = Utils(self.driver)
-        Util.validation(self.phone)
+        # Util = Utils(self.driver)
+        # Util.validation(self.phone)
 
     def enter_email(self, email):
         self.driver.find_element(By.XPATH, self.email).clear()
@@ -54,8 +57,11 @@ class PageArea:
         self.driver.find_element(By.XPATH, self.city).send_keys(city)
         # time.sleep(3)
 
-    def enter_number(self, number,select):
+    def enter_number(self, number):
         self.driver.find_element(By.XPATH, self.number).clear()
+        self.driver.find_element(By.XPATH,self.number).send_keys(number)
+        time.sleep(3)
+
 
         # self.driver.execute_script(f"document.getElementsByClassName('input_input ')[2].value = '{number}'")
 
