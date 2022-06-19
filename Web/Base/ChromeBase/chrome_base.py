@@ -12,7 +12,7 @@ class Base_Chrome:
         print('\n----------------------')
         print('Test is Started')
         print('------------------------')
-        self.driver.implicitly_wait(15)
+        self.driver.implicitly_wait(20)
         self.driver.get('https://qa.trado.co.il/')
         self.driver.maximize_window()
 

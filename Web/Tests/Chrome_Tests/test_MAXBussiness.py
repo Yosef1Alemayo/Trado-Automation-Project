@@ -1,140 +1,116 @@
 import allure
 import pytest
 from Web.Pages.maxBussinesPages import MaxBussinesPage
-from Web.Utils.PreConditions.pre_condition import Precondition_Chrome
-from Web.Utils.utils import Utils
+from Web.Utils.PreConditions.precondition import Pre_Condition
 
 
-@pytest.mark.usefixtures('login_correctly')
-class TestSigninMaxBussiness(Precondition_Chrome):
-
-    @allure.description('Validating MAX signin page is open')
-    @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
-
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
-        driver = self.driver
-        signin = MaxBussinesPage(driver)
-        signin.click_link()
-        Utils.validation()
-
+@pytest.mark.usefixtures('login_betty')
+class TestSigninMaxBussiness(Pre_Condition):
 
     @allure.description('Validating creating new business account with valid details')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
+    def test_signin_correctly(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating creating new business account with valid details"""
         driver = self.driver
         signin = MaxBussinesPage(driver)
         signin.signin_maxBussines("Betty", "Melaku", "0505864555", "Ashdod", "23", "chocolate", "256", "112365")
-        Utils.validation()
 
     @allure.description('Validating creating new business account with invalid phone number')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
+    def test_signin_invalidCredntials(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating creating new business account with invalid phone number"""
         driver = self.driver
         signin = MaxBussinesPage(driver)
         signin.signin_maxBussines("Betty", "Melaku", "050hdjunm55", "Ashdod", "23", "chocolate", "256", "112365")
-        Utils.validation()
 
     @allure.description('Validating creating new business account with NULL phone number')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
+    def test_signin_invalidCredntials1(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating creating new business account with NULL phone number"""
         driver = self.driver
         signin = MaxBussinesPage(driver)
         signin.signin_maxBussines("Betty", "Melaku", "", "Ashdod", "23", "chocolate", "256", "112365")
-        Utils.validation()
 
     @allure.description('Validating creating new business account with invalid first name')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
+    def test_signin_invalidCredntials2(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating creating new business account with invalid first name"""
         driver = self.driver
         signin = MaxBussinesPage(driver)
         signin.signin_maxBussines("123", "Melaku", "0505864555", "Ashdod", "23", "chocolate", "256", "112365")
-        Utils.validation()
 
     @allure.description('Validating creating new business account with invalid last name')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
+    def test_signin_invalidCredntials3(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating creating new business account with invalid last name"""
         driver = self.driver
         signin = MaxBussinesPage(driver)
         signin.signin_maxBussines("Betty", "456", "0505864555", "Ashdod", "23", "chocolate", "256", "112365")
-        Utils.validation()
 
     @allure.description('Validating creating new business account with invalid city or address')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
+    def test_signin_invalidCredntials3(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating creating new business account with invalid city or address"""
         driver = self.driver
         signin = MaxBussinesPage(driver)
         signin.signin_maxBussines("Betty", "Melaku", "0505864555", "458", "23", "chocolate", "256", "112365")
-        Utils.validation()
 
     @allure.description('Validating creating new business account with invalid street number')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
+    def test_signin_invalidCredntials4(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating creating new business account with invalid street number"""
         driver = self.driver
         signin = MaxBussinesPage(driver)
         signin.signin_maxBussines("Betty", "Melaku", "0505864555", "Ashdod", "ADC", "chocolate", "256", "112365")
-        Utils.validation()
 
     @allure.description('Validating creating new business account with invalid business name')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
+    def test_signin_invalidCredntials5(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating creating new business account with invalid business name"""
         driver = self.driver
         signin = MaxBussinesPage(driver)
         signin.signin_maxBussines("Betty", "Melaku", "0505864555", "Ashdod", "23", "88974", "256", "112365")
-        Utils.validation()
 
     @allure.description('Validating creating new business account with invalid business ID')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
+    def test_signin_invalidCredntials6(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating creating new business account with invalid business ID"""
         driver = self.driver
         signin = MaxBussinesPage(driver)
         signin.signin_maxBussines("Betty", "Melaku", "0505864555", "Ashdod", "23", "chocolate", "ABC", "112365")
-        Utils.validation()
 
     @allure.description('Validating creating new business account with invalid zipCode')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
+    def test_signin_invalidCredntials7(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating creating new business account with invalid zipCode"""
         driver = self.driver
         signin = MaxBussinesPage(driver)
         signin.signin_maxBussines("Betty", "Melaku", "0505864555", "Ashdod", "23", "chocolate", "256", "ABCDE")
-        Utils.validation()
 
     @allure.description('Validating creating new business account with invalid credentials')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
+    def test_signin_invalidCredntials8(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating creating new business account with invalid credentials"""
         driver = self.driver
         signin = MaxBussinesPage(driver)
         signin.signin_maxBussines("123", "u", "05055", "54", "BV", "3365$", "ACDV", "CDCSD")
-        Utils.validation()
 
     @allure.description('Validating creating new business account when all the fields are NULL')
     @allure.severity(allure.severity_level.CRITICAL)
-    def test_signin_correctly(self, login_correctly):
+    def test_signin_invalidCredntials9(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating creating new business account when all the fields are NULL"""
         driver = self.driver
         signin = MaxBussinesPage(driver)
         signin.signin_maxBussines("", "", "", "", "", "", "", "")
-        Utils.validation()

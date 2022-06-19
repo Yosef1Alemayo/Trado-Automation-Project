@@ -5,4 +5,4 @@ class PreCondition_Locators:
     LOGIN_SECTION = "//div[1]/div[1]/a[1]/span[2]/i[1]"
     PHONE_FIELD = "//form[1]/div[1]/div[1]/span[1]/input[1]"
     CONNECT_BUTTON = 'input[class="form_submitBtn"]'
-    PASSWORD_FIELD = "//form[1]/div[1]/div[1]/span[1]/input[1]"
+    PASSWORD_FIELD = 'div[class="form_loginCode"]'
