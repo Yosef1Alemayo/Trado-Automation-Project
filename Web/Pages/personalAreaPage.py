@@ -1,51 +1,76 @@
 from Web.Locators.personalArea_Locators import LocatorArea
 from selenium.webdriver.common.by import By
-import pytest
+import time
+from selenium.webdriver.common.keys import Keys
+from Web.Utils.utils import Utils
 
 
 class PageArea:
-    def __init__(self,driver):
+    def __init__(self, driver):
         self.driver = driver
-        self.Login = LocatorArea.Login
-        self.Phone = LocatorArea.Phone
-        self.Click_login = LocatorArea.Click_login
-        self.Sms_code = LocatorArea.Sms_code
-        self.Verify_button = LocatorArea.Verify_button
         self.Personal_area_button = LocatorArea.Personal_area_button
+        self.first_name = LocatorArea.first_name
+        self.last_name = LocatorArea.last_name
+        self.phone = LocatorArea.phone
+        self.email = LocatorArea.email
+        self.id = LocatorArea.id
+        self.city = LocatorArea.city
+        self.number = LocatorArea.number
         self.Edit_button = LocatorArea.Edit_button
         self.Save_button = LocatorArea.Save_button
-        self.Search = LocatorArea.Search
 
-    def test_login(self):
-        self.driver.fined_element(By.XPATH,self.Login).click()
-        self.driver.fined_element(By.XPATH,self.Phone).send_keys('0522578853')
-        self.driver.fined_element(By.XPATH,self.Click_login).click()
-        # data base
-        self.driver.fined_element(By.XPATH,self.Sms_code).send_keys('')
-        self.driver.fined_element(By.XPATH,self.Verify_button).click()
+    def Click_Personal_Area(self):
+        self.driver.find_element(By.XPATH, self.Personal_area_button).click()
+
+    def enter_first_name(self, first_name):
+        self.driver.find_element(By.XPATH, self.first_name).clear()
+        self.driver.find_element(By.XPATH, self.first_name).send_keys(first_name)
+        # Util = Utils(self.driver)
+        # Util.validation(self.enter_first_name())
+        time.sleep(3)
+
+    def enter_last_name(self, last_name):
+        self.driver.find_element(By.XPATH, self.last_name).clear()
+        self.driver.find_element(By.XPATH, self.last_name).send_keys(last_name)
+        time.sleep(3)
+
+    def enter_phone(self, phone):
+        # self.driver.find_element(By.XPATH, self.phone).clear()
+        self.driver.find_element(By.XPATH, self.phone).send_keys(phone)
+        Util = Utils(self.driver)
+        Util.validation(self.phone)
+
+    def enter_email(self, email):
+        self.driver.find_element(By.XPATH, self.email).clear()
+        self.driver.find_element(By.XPATH, self.email).send_keys(email)
+
+    def enter_id(self, id):
+        self.driver.find_element(By.XPATH, self.id).clear()
+        self.driver.find_element(By.XPATH, self.id).send_keys(id)
+        # time.sleep(3)
+
+    def enter_city(self, city):
+        self.driver.find_element(By.XPATH, self.city).clear()
+        self.driver.find_element(By.XPATH, self.city).send_keys(city)
+        # time.sleep(3)
+
+    def enter_number(self, number,select):
+        self.driver.find_element(By.XPATH, self.number).clear()
+
+        # self.driver.execute_script(f"document.getElementsByClassName('input_input ')[2].value = '{number}'")
+
+        # self.Select(self.driver.find_element(By.XPATH, number))
+        # select.select_by_index(2)
+
+        # self.driver.find_element(By.XPATH,self.number).send_keys(number)
+        time.sleep(3)
+
+    def click_Edit_button(self):
+        self.driver.find_element(By.XPATH, self.Edit_button).click()
+
+    def click_Save_button(self):
+        self.driver.find_element(By.XPATH, self.Save_button).click()
 
 
-    def test_delivery_details(self):
-        self.driver.fined_element(By.ID,self.Personal_area_button).click()
-        a = self.driver.find_elemnets(By.XPATH,"//input")
-        for i in range(len(a)):
-            if i == 1:
-                a[i].send_keys('Jonathan')
-            elif i == 2:
-                a[i].send_keys('Elias')
-            elif i == 3:
-                a[i].send_keys('0522578853')
-            elif i == 4:
-                a[i].send_keys('gonathan46@gmail.com')
-            elif i == 5:
-                a[i].send_keys('205593718')
-            elif i == 6:
-                a[i].send_keys('Holon')
-            elif i == 7:
-                a[i].send_keys('10')
-        self.driver.fined_element(By.XPATH,self.Edit_button).click()
-        self.driver.fined_element(By.XPATH,self.Save_button).click()
 
 
-    def test_search(self,):
-        self.driver.fined_element(By.XPATH,self.Search).send_keys()
