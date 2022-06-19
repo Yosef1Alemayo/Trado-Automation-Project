@@ -93,10 +93,19 @@ class Pre_Condition(Base_Chrome):
         self.enter_sms_code(sms)
         self.click_connect()
 
-
-
-
-
+    @pytest.mark.usefixtures('set_up_chrome')
+    @pytest.fixture
+    def login_jonathan(self, set_up_chrome):
+        self.click_restaurants()
+        self.click_cocktails()
+        self.click_save_button()
+        self.click_login_section()
+        self.enter_phone('0522578853')
+        self.click_connect()
+        sms = query_for_login_code('0522578853')
+        sleep(5)
+        self.enter_sms_code(sms)
+        self.click_connect()
 
 
 
