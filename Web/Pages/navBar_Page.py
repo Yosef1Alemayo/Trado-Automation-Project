@@ -20,9 +20,6 @@ class NavBarPage(CommonQuePage):
         self.assert_locator = NavBarLocators.list_locator
         self.collectionbuttons = NavBarLocators.list_collectionbuttons
 
-
-
-
     def clickON(self, locator):
         self.driver.find_element(By.XPATH, locator).click()
 
@@ -66,7 +63,7 @@ class NavBarPage(CommonQuePage):
             self.clickON(c)
             sleep(3)
             value = query_for_collection_len(i)
-            print(i)
+            print(i,value)
             x = self.assert_txt(a)
             util.validation(value, x)
             print(value, x)

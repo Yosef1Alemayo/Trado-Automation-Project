@@ -19,12 +19,15 @@ class CommonQuePage:
         self.productPage_text = CommonQueLocators.product_pageTXT
         self.uploadproduct_text = CommonQueLocators.uploadproduct_txt
 
+    @allure.step("Click on common question button")
     def click_onlink(self):
         self.driver.find_element(By.XPATH, self.commonQue_links).click()
 
+    @allure.step("Click on 'move to products page' button")
     def click_productsPage(self):
         self.driver.find_element(By.XPATH, self.productsPage_button).click()
 
+    @allure.step("Click on 'upload product page' button")
     def click_uploadProduct(self):
         self.driver.find_element(By.XPATH, self.uploadProduct_button).click()
 
@@ -34,11 +37,8 @@ class CommonQuePage:
 
     def clicking_allLinks(self):
         self.click_onlink()
-        sleep(3)
         Util = Utils(self.driver)
-        sleep(3)
         Util.validation(self.commonQue_text, self.assert_txt(self.commonQue_xpath))
-        sleep(3)
         self.click_productsPage()
         Util.validation(self.productPage_text, self.assert_txt(self.productPage_xpath))
         self.driver.back()
