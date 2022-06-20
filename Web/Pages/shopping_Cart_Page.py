@@ -1,8 +1,9 @@
+import time
+
 from Web.Locators.shooping_Cart_Locators import ShoppingCartLocators
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
 from Server.DB.main import query_for_products_details
 from Server.DB.main import query_for_products_with_2_keys
 from Web.Utils.utils import Utils
@@ -31,8 +32,9 @@ class ShoppingCartPage():
         self.payment_button = ShoppingCartLocators.payment_button
 
         self.prod_name_in_cart = ShoppingCartLocators.prod_name_in_cart
+        self.num_of_cartons_in_cart = ShoppingCartLocators.num_of_cartons_in_cart
         self.prod_price_in_cart = ShoppingCartLocators.prod_price_in_cart
-        self.quantity_per_product = ShoppingCartLocators.quantity_per_product
+        self.quntity_per_product_in_cart = ShoppingCartLocators.quntity_per_product_in_cart
 
 ### precondition ###
     def click_on_canabis_page(self):
@@ -50,18 +52,19 @@ class ShoppingCartPage():
 
 
     '''Preconditin to all tests : Enter to canabis page and click on product'''
+
     def precondition_all_tests(self):
         self.click_on_canabis_page()
         self.click_on_product_from_list(4)
 
+    ''' ### Get product details form web for assertion: ###  '''
 
-### Get product details: for assertion ###
     def get_product_name(self):
         prodName = self.driver.find_element(By.XPATH,self.product_name).get_attribute("innerText")
         return prodName
 
     def get_product_price_per_unit(self):
-        prodPrice= self.driver.find_element(By.XPATH,self.product_price_per_unit).get_attribute("innerText").split(".")
+        prodPrice= self.driver.find_element(By.XPATH,self.product_price_per_unit).get_attribute("innerText").split("₪")
         return float(prodPrice[0])
 
     def get_unit_in_carton(self):
@@ -80,16 +83,44 @@ class ShoppingCartPage():
         minOrder = self.driver.find_element(By.XPATH,self.minimum_order).get_attribute("innerText").split(" ")
         return minOrder[2]
 
-###Actions :
+
+    '''### Get prod details in cart for assertion### '''
+
+    def get_prod_name_in_cart(self):
+        prodNameInCart = self.driver.find_element(By.XPATH, self.prod_name_in_cart).get_attribute("innerText")
+        return prodNameInCart
+        # print(prodNameInCart)
+
+    def get_num_of_cartons_in_cart(self):
+        cartonNum = self.driver.find_element(By.XPATH, self.num_of_cartons_in_cart).get_attribute("outerText").split(" ")
+        return cartonNum[0]
+
+    def get_prod_price_in_cart(self):
+        prodPriceInCart = self.driver.find_element(By.XPATH, self.prod_price_in_cart).get_attribute("innerText").split("₪")
+        return prodPriceInCart[1]
+        # print(prodPriceInCart[1])
+
+    def get_quntity_per_product_in_cart(self):
+        quntity = self.driver.find_element(By.XPATH, self.quntity_per_product_in_cart).get_attribute("valueAsNumber")
+        return int(quntity)
+
+    ''' ### Actions in cart :### '''
 
     #Adding prod(1 per click)
-    def click_on_plus_button(self):
-        self.driver.find_element(By.XPATH,self.plus_button).click()
-        self.driver.implicitly_wait(5)
+    def click_on_plus_button(self,num):
+        for i in range(num):
+            WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH,self.plus_button)))
+            self.driver.find_element(By.XPATH,self.plus_button).click()
+            time.sleep(2)
+        return num
 
     #Reduce from quantity(1 per click)
-    def click_on_minus_button(self):
-        self.driver.find_element(By.XPATH,self.minus_button).click()
+    def click_on_minus_button(self,num):
+        for i in range(num):
+            WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH,self.minus_button)))
+            self.driver.find_element(By.XPATH,self.minus_button).click()
+            time.sleep(2)
+        return num
 
     #Delete sepcific prod from cart
     def click_on_delete_prod_from_cart(self):
@@ -102,35 +133,39 @@ class ShoppingCartPage():
     def click_on_payment_button(self):
         self.driver.find_element(By.XPATH, self.payment_button).click()
 
-### Get prod details in cart :
-    def get_prod_name_in_cart(self):
-        prodNameInCart = self.driver.find_element(By.XPATH,self.prod_name_in_cart).get_attribute("innerText")
-        return prodNameInCart
-        # print(prodNameInCart)
-
-    def get_prod_price_in_cart(self):
-        prodPriceInCart = self.driver.find_element(By.XPATH,self.prod_price_in_cart).get_attribute("innerText")
-        return prodPriceInCart
-        # print(prodPriceInCart)
-
-    def get_quantity_per_product_in_cart(self):
-        quantity = self.driver.find_element(By.XPATH,self.quantity_per_product).get_attribute("innerText")
-        return quantity
-        # print(quantity)
 
 
+    ''' ### Calculations : ### '''
+    #price per unit X unit in carton = carton_price
+    def calculating_carton_price(self):
+        pricePerUnit = self.get_product_price_per_unit()
+        unitInCarton = self.get_unit_in_carton()
+        cartonPrice = float(pricePerUnit)*float(unitInCarton)
+        return ("%.2f" % cartonPrice)
+        #".2f"% - מחזיר 2 מספרים אחרי הנקודות במספר עשרוני
+        # print("%.2f" % cartonPrice)
 
-#Calculations :
-    #= price per unit X unit in carton = carton_price
-    def calculating_carton_price(self,num1,num2):
-        cal = float(num1)*float(num2)
+    #price in cart(per product) = carton price X num of cartons in cart :
+    def calculating_price_in_cart_to_each_prod(self):
+        cartonPrice = self.calculating_carton_price()
+        numOfCartonIncart = self.get_num_of_cartons_in_cart()
+        price = float(cartonPrice)*float(numOfCartonIncart)
+        return "%.2f" %price
+        #".2f"% - מחזיר 2 מספרים אחרי הנקודות במספר עשרוני
+        # print("%.2f" % price)
+
+    #This function calculates how much quantity should remain after reduction from the product:
+    #and we used this for assertion:
+    #num = how meny we want to reduce
+    def calculating_quantity_after_reduce_quantity(self,num):
+        a = self.get_num_of_cartons_in_cart()
+        b = self.click_on_minus_button(num)
+        cal = int(a) - int(b)
         return cal
 
-
-
-#פונקציות להשוואת נתונים של מוצר מול הDB
-#ואז לעשות פונקציה אחת גדולה
-    #!1
+    ''' ###  Assertion product details in DB : ###'''
+    #פונקציות להשוואת נתונים של מוצר מול הDB
+    #1
     #Verify name:
     def verify_product_name(self):
         utils = Utils(self.driver)
@@ -165,7 +200,6 @@ class ShoppingCartPage():
     # פונקציה שמחשבת מחיר לקרטון : מחיר לקרטון = מחיר ליחידה X מס' יחידות שיש בקרטון
     def verify_price_per_carton(self):
         utils = Utils(self.driver)
-        # cart = ShoppingCartPage(driver)
         cartonpriceInWeb = self.get_product_price_per_carton()
         #get price from DB
         dbQuery= query_for_products_details("אקדיה", 'price')
@@ -173,15 +207,13 @@ class ShoppingCartPage():
         unitPrice = self.get_product_price_per_unit()
         #get_unit in carton from web
         unitIncarton = self.get_unit_in_carton()
-
+        #calaulation price per carton :
         calculation_based_on_DB  = self.calculating_carton_price(dbQuery,unitIncarton)
         calculation_based_on_web = self.calculating_carton_price(unitPrice,unitIncarton)
-
-        utils.validation(calculation_based_on_DB,calculation_based_on_web)    #unstable
+        #assertion:
+        utils.validation(calculation_based_on_DB,calculation_based_on_web)      ###unstable
         print(calculation_based_on_DB)
         print(calculation_based_on_web)
-
-        #לעשות 2 טסטים ולהשוות בניהם:
 
         # 4
         # Verify price per carton:
@@ -197,38 +229,32 @@ class ShoppingCartPage():
         # print("unit in carton:",unitIncarton)
         # print("calculation:",expected_carton_price)
 
-        # 5
-        # #Verify barcode :
-        # barcode = cart.get_product_barcode()
-        # B = query_for_products_details("אקדיה","barcode")
-        # utils.validation(B,barcode)          #### PASSED
+    # 5
+    #Verify barcode :
+    def verify_barcode(self):
+        utils = Utils(self.driver)
+        barcode = self.get_product_barcode()
+        dbQuery = query_for_products_details("אקדיה","barcode")
+        utils.validation(dbQuery,barcode)          #### PASSED
+        print(dbQuery)
+        print(barcode)
 
-        # 6
-        # Verify minimum order:
-        # min = cart.get_minimum_order()
-        # M = query_for_products_with_2_keys("אקדיה","units","minimumOrderCartonsCount")
-        # utils.validation(M,min)                ####PASSED
+    # 6
+    # Verify minimum order:
+    def verify_minium_order(self):
+        utils = Utils(self.driver)
+        minOrder = self.get_minimum_order()
+        dbQuery = query_for_products_with_2_keys("אקדיה","units","minimumOrderCartonsCount")
+        utils.validation(dbQuery,minOrder)                ####PASSED
+        print(dbQuery)
+        print(minOrder)
 
-####פונקציה אחת גדולה לכל האימות נתונים##
-    # def verify_products_details(self):
-    #     driver = self.driver
-    #     utils = Utils(driver)
-    #     cart = ShoppingCartPage(driver)
-    #     #name:
-    #     name = cart.get_product_name()
-    #     dbQuery = query_for_products_details("אקדיה", 'name')
-    #     utils.validation(dbQuery, name)  ####PASSED
-    #     print(name)
-    #     print(dbQuery)
-    #     #price:
-    #     price = cart.get_product_price_per_unit()
-    #     dbQuery = query_for_products_details("אקדיה" ,'price')
-    #     utils.validation(dbQuery, price)       #Assertion Error טסט תקין - אבל נופל בגלל
-    #     print(price)
-    #     print(dbQuery)
-    #     #units:
-    #     units = cart.get_unit_in_carton()
-    #     dbQuery = query_for_products_with_2_keys("אקדיה", 'units', 'unitsInCarton')
-    #     utils.validation(dbQuery, units)  ####PASSED
-    #     print(units)
-    #     print(dbQuery)
+
+    # def pra(self):
+    #     a = self.driver.find_element(By.CSS_SELECTOR, 'div[class="productBtn_amount"]')
+    #     b = a.find_element(By.TAG_NAME, 'input')
+    #     return b.get_attribute('valueAsNumber')
+
+    # def get_quntity_of_product(self):
+    #     counter = self.driver.find_element(By.XPATH,"//div[1]/div[1]/div[1]/div[2]/div[2]/div[1]/div[1]/div[1]/input[1]").get_attribute("valueAsNumber")
+    #     return counter

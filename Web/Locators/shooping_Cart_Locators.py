@@ -28,8 +28,9 @@ class ShoppingCartLocators:
     #shopping cart
     count_prod_in_cart = "//div[2]/div[1]/div[2]/div[1]/div[1]/div[1]/div[1]/div[1]"
     prod_name_in_cart = " //div[1]/a[1]/div[1]/div[2]/div[1]"
+    num_of_cartons_in_cart = "//div[2]/div[1]/a[1]/div[1]/div[2]/div[2]/div[2]"
     prod_price_in_cart = "//div[3]/div[1]/div[1]/div[1]/div[1]/span[1]"
-    quantity_per_product = "//div[2]/div[3]/div[1]/div[1]/div[1]/input[1]"    #לא תקין להביא נתיב חדש
+    quntity_per_product_in_cart = "//div[2]/div[1]/a[1]/div[1]/div[2]/div[3]/div[1]/div[1]/div[1]/input[1]"
     payment_button = "//button[contains(text(),'תשלום')]"
 
     #mooving to shippment details page:
