@@ -246,11 +246,12 @@ class Test_Upload_New_Product1(Pre_Condition):
 
         upload_product.click_add_new_product_button()
 
+        """ Details Of Product"""
         upload_product.click_plus_button()
         time.sleep(3)
         upload_product.click_minus_button()
         time.sleep(3)
         print(upload_product.amount_of_days())
-        # upload_product.enter_data_to_inputs(8, ['1', '1', '1', '1', '1', '1', '1', '1'])
-        # time.sleep(5)
+        upload_product.enter_data_to_inputs(8, ['1', '1', '1', '1', '1', '1', '1', '1'])
+        time.sleep(5)
 
