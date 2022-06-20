@@ -2,13 +2,13 @@ import allure
 import pytest
 from Web.Pages.upload_new_product_page import Upload_New_Product_Page
 from Web.Pages.upload_new_product_page import Upload_Product_with_Store
-from Web.Utils.PreConditions.precondition import Pre_Condition
+from Web.Utils.PreConditions.precondition import Pre_Condition1
 from Server.DB.main import query_for_products_details
 from Web.Utils.utils import Utils
 
 """ All the Tests when User Hasn't Store """
 @pytest.mark.usefixtures('login_tsiona')
-class Test_Upload_New_Product0(Pre_Condition):
+class Test_Upload_New_Product2(Pre_Condition1):
 
     @allure.description('Upload a product incorrectly when the user does not have a store')
     @allure.severity(allure.severity_level.CRITICAL)
@@ -223,7 +223,7 @@ class Test_Upload_New_Product0(Pre_Condition):
 
 """ All the Tests when User has a Store """
 @pytest.mark.usefixtures('login_yosef')
-class Test_Upload_New_Product1(Pre_Condition):
+class Test_Upload_New_Product3(Pre_Condition1):
     @allure.description('Upload a product correctly when all the fields are full')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_correctly1(self):
