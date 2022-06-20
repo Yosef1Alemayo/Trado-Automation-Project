@@ -15,7 +15,7 @@ def query_for_products_details(product_name, key):
     collection = user.db_and_collection('products')
     query = collection.find_one({'name': f'{product_name}'})
     value = query[f'{key}']
-    return value
+    return str(value)
 
 def query_for_products_with_2_keys(prod_name, key, key2):
     string_connection = 'mongodb+srv://test_dev:AtmNf7Iz5BIs0dzc@cluster0.qnr3p.mongodb.net/?retryWrites=true&w=majority'

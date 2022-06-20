@@ -4,7 +4,8 @@ class Upload_New_Product_Locators:
     NEW_PRODUCT_FIELDS = 'input[class="add_product_page_form_item"]'
     ADD_NEW_PRODUCT_BUTTON = 'input[class="form_submitBtn"]'
     ADD_NEW_PRODUCT_SECTION = 'span[class="verticalMenu_AddProductBtn"]'
-    IMAGE = 'label[class="imageUpload_uploadImageText"]'
+    IMAGE = "//input[@id='files']"
+    # Xpath:
     CHECKBOX = '//div[1]/div[2]/div[3]/div[1]/input[1]'
     UNIT_AND_WEIGHT = '//div[1]/div[2]/div[3]/div[1]/span'
     PLUS_BUTTON = '//div[3]/div[1]/div[1]/div[1]/span[1]'
@@ -14,5 +15,6 @@ class Upload_New_Product_Locators:
     # Messages
     STORE_VALIDATION_FAILED = 'div[class="form_message"]'
     FILL_THE_FIELD = "//form[1]/div[2]/div/div/div/div"
+    ERROR_FIELD_IS_EMPTY = 'div[class="form_note "]'
 
 

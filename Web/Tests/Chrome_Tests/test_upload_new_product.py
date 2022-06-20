@@ -1,9 +1,9 @@
-import time
 import allure
 import pytest
 from Web.Pages.upload_new_product_page import Upload_New_Product_Page
 from Web.Pages.upload_new_product_page import Upload_Product_with_Store
 from Web.Utils.PreConditions.precondition import Pre_Condition
+from Server.DB.main import query_for_products_details
 from Web.Utils.utils import Utils
 
 @pytest.mark.usefixtures('login_tsiona')
@@ -222,36 +222,324 @@ class Test_Upload_New_Product(Pre_Condition):
 
 @pytest.mark.usefixtures('login_yosef')
 class Test_Upload_New_Product1(Pre_Condition):
-    def test1(self):
+    @allure.description('Upload a product correctly when all the fields are full')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_correctly1(self):
         driver = self.driver
         utils = Utils(driver)
         upload_product = Upload_Product_with_Store(driver)
-
-        """ First page """
-
+        ''' Page1'''
         upload_product.click_add_new_product_section()
-        upload_product.enter_data_to_inputs(6, ['1', '1', '1', '1', '', '1'])
+        upload_product.enter_data_to_inputs(6, ['261196', 'Galax', 'LG', 'LG-ELEC', '', '15'])
+        upload_product.click_on_upload_image("C:/Users/yossi/Desktop/Image.jpg")
         upload_product.fill_checkbox()
         upload_product.click_add_new_product_button()
-
-
-        """ Units or Weight ? """
-        upload_product.enter_data_to_inputs(3, ['1', '1', '1'])
-
-        upload_product.filter_products(1)
-        upload_product.enter_data_to_inputs(2, ['1', '1'])
-
-        upload_product.filter_products(0)
-        upload_product.enter_data_to_inputs(3, ['1', '1', '1'])
-
+        ''' Page2'''
+        upload_product.enter_data_to_inputs(3, ['15', '5', '3'])
         upload_product.click_add_new_product_button()
+        ''' Page3'''
+        upload_product.enter_data_to_inputs(8, ['רחובות', 'הרצל', '25', 'ב', 'יבואן מקביל', '3', 'אבי', '0521111111'])
+        upload_product.click_plus_button(3)
+        upload_product.click_minus_button(1)
+        utils.validation(upload_product.amount_of_days(), 3-1)
+        upload_product.click_add_new_product_button()
+        ''' Asserts '''
+        utils.validation(upload_product.upload_prod_successfully(), 'מוצר התווסף בהצלחה')
+        db_query1 = query_for_products_details('Galax', 'name')
+        db_query2 = query_for_products_details('Galax', 'barcode')
+        db_query3 = query_for_products_details('Galax', 'price')
+        utils.validation(db_query1, 'Galax')
+        utils.validation(db_query2, '261196')
+        utils.validation(db_query3, '15')
 
-        """ Details Of Product"""
-        upload_product.click_plus_button()
-        time.sleep(3)
-        upload_product.click_minus_button()
-        time.sleep(3)
-        print(upload_product.amount_of_days())
-        upload_product.enter_data_to_inputs(8, ['1', '1', '1', '1', '1', '1', '1', '1'])
-        time.sleep(5)
+    @allure.description('Upload a product correctly without Image')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_correctly2(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['261196', 'Betty', 'LG', 'LG-ELEC', '', '15'])
+        upload_product.fill_checkbox()
+        upload_product.click_add_new_product_button()
+        '''Page2'''
+        upload_product.enter_data_to_inputs(3, ['15', '5', '3'])
+        upload_product.click_add_new_product_button()
+        '''Page3'''
+        upload_product.enter_data_to_inputs(8, ['רחובות', 'הרצל', '25', 'ב', 'יבואן מקביל', '3', 'אבי', '0521111111'])
+        upload_product.click_plus_button(3)
+        upload_product.click_minus_button(1)
+        utils.validation(upload_product.amount_of_days(), 3-1)
+        upload_product.click_add_new_product_button()
+        '''Asserts'''
+        utils.validation(upload_product.upload_prod_successfully(), 'מוצר התווסף בהצלחה')
+        db_query1 = query_for_products_details('Betty', 'name')
+        db_query2 = query_for_products_details('Betty', 'barcode')
+        db_query3 = query_for_products_details('Betty', 'price')
+        utils.validation(db_query1, 'Betty')
+        utils.validation(db_query2, '261196')
+        utils.validation(db_query3, '15')
 
+    @allure.description('Upload a product correctly without Image and without Business days')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_correctly3(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['261196', 'Floor', 'BMW', 'BMW-MOTORS', '', '1500'])
+        upload_product.fill_checkbox()
+        upload_product.click_add_new_product_button()
+        '''Page2'''
+        upload_product.enter_data_to_inputs(3, ['15', '5', '3'])
+        upload_product.click_add_new_product_button()
+        '''Page3'''
+        upload_product.enter_data_to_inputs(8, ['רחובות', 'הרצל', '25', 'ב', 'יבואן מקביל', '3', 'אבי', '0521111111'])
+        upload_product.click_add_new_product_button()
+        '''Asserts'''
+        utils.validation(upload_product.upload_prod_successfully(), "מוצר התווסף בהצלחה")
+        db_query1 = query_for_products_details('Floor', 'name')
+        db_query2 = query_for_products_details('Floor', 'barcode')
+        db_query3 = query_for_products_details('Floor', 'price')
+        utils.validation(db_query1, 'Floor')
+        utils.validation(db_query2, '261196')
+        utils.validation(db_query3, '1500')
+
+    @allure.description('Upload a product correctly only with the requirements fields')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_correctly4(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['261196', 'Rivka', '', '', '', '1500'])
+        upload_product.fill_checkbox()
+        upload_product.click_add_new_product_button()
+        '''Page2'''
+        upload_product.enter_data_to_inputs(3, ['15', '5', '3'])
+        upload_product.click_add_new_product_button()
+        '''Page3'''
+        upload_product.enter_data_to_inputs(8, ['', '', '', '', 'יבואן מקביל', '', '', '0521111111'])
+        upload_product.click_add_new_product_button()
+        '''Asserts'''
+        utils.validation(upload_product.upload_prod_successfully(), "מוצר התווסף בהצלחה")
+        db_query1 = query_for_products_details('Rivka', 'name')
+        db_query2 = query_for_products_details('Rivka', 'barcode')
+        db_query3 = query_for_products_details('Rivka', 'price')
+        utils.validation(db_query1, 'Rivka')
+        utils.validation(db_query2, '261196')
+        utils.validation(db_query3, '1500')
+
+    @allure.description('Upload a product correctly with Weight')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_correctly5(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['261196', 'Asaf', '1', '1', '', '150000'])
+        upload_product.fill_checkbox()
+        upload_product.click_add_new_product_button()
+        '''Page2'''
+        upload_product.filter_products(1)
+        upload_product.enter_data_to_inputs(2, ['5', '3'])
+        upload_product.click_add_new_product_button()
+        '''Page3'''
+        upload_product.enter_data_to_inputs(8, ['1', '1', '1', '1', 'יבואן מקביל', '1', '1', '0521111111'])
+        upload_product.click_add_new_product_button()
+        '''Asserts'''
+        utils.validation(upload_product.upload_prod_successfully(), "מוצר התווסף בהצלחה")
+        db_query1 = query_for_products_details('Asaf', 'name')
+        db_query2 = query_for_products_details('Asaf', 'barcode')
+        db_query3 = query_for_products_details('Asaf', 'price')
+        utils.validation(db_query1, 'Asaf')
+        utils.validation(db_query2, '261196')
+        utils.validation(db_query3, '150000')
+
+    @allure.description('Upload a product incorrectly - Page1, when barcode field is empty')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_incorrectly1(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['', 'Asaf', '1', '1', '', '150000'])
+        upload_product.click_add_new_product_button()
+        utils.validation(upload_product.js_messages_for_all_the_fields(6, 0), "Please fill out this field.")
+        utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
+
+    @allure.description('Upload a product incorrectly - Page1, when ProductName field is empty')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_incorrectly2(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['123456', '', '1', '1', '', '150000'])
+        upload_product.click_add_new_product_button()
+        utils.validation(upload_product.js_messages_for_all_the_fields(6, 1), "Please fill out this field.")
+        utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
+
+    @allure.description('Upload a product incorrectly - Page1, when Price field is empty')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_incorrectly3(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['123456', 'Joni', '1', '1', '', ''])
+        upload_product.click_add_new_product_button()
+        utils.validation(upload_product.js_messages_for_all_the_fields(6, 5), "Please fill out this field.")
+        utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
+
+    @allure.description('Upload a product incorrectly - Page1, when all the Required field is empty')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_incorrectly4(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['', '', '1', '1', '', ''])
+        upload_product.click_add_new_product_button()
+        utils.validation(upload_product.js_messages_for_all_the_fields(6, 0), "Please fill out this field.")
+        utils.validation(upload_product.js_messages_for_all_the_fields(6, 1), "Please fill out this field.")
+        utils.validation(upload_product.js_messages_for_all_the_fields(6, 5), "Please fill out this field.")
+        utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
+        utils.validation(upload_product.error_message(1), "נא למלא שדה זה")
+        utils.validation(upload_product.error_message(2), "נא למלא שדה זה")
+
+    @allure.description('Upload a product incorrectly - Page2, when cartonAmount field is empty')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_incorrectly5(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['261196', 'Floor', 'BMW', 'BMW-MOTORS', '', '1500'])
+        upload_product.fill_checkbox()
+        upload_product.click_add_new_product_button()
+        '''Page2'''
+        upload_product.enter_data_to_inputs(3, ['', '5', '3'])
+        upload_product.click_add_new_product_button()
+        utils.validation(upload_product.js_messages_for_all_the_fields(3, 0), "Please fill out this field.")
+        utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
+
+    @allure.description('Upload a product incorrectly - Page2, when unitsInStock field is empty')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_incorrectly6(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['261196', 'Floor', 'BMW', 'BMW-MOTORS', '', '1500'])
+        upload_product.fill_checkbox()
+        upload_product.click_add_new_product_button()
+        '''Page2'''
+        upload_product.enter_data_to_inputs(3, ['1', '', '3'])
+        upload_product.click_add_new_product_button()
+        utils.validation(upload_product.js_messages_for_all_the_fields(3, 1), "Please fill out this field.")
+        utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
+
+    @allure.description('Upload a product incorrectly - Page2, when minimumCartons field is empty')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_incorrectly7(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['261196', 'Floor', 'BMW', 'BMW-MOTORS', '', '1500'])
+        upload_product.fill_checkbox()
+        upload_product.click_add_new_product_button()
+        '''Page2'''
+        upload_product.enter_data_to_inputs(3, ['1', '1', ''])
+        upload_product.click_add_new_product_button()
+        utils.validation(upload_product.js_messages_for_all_the_fields(3, 2), "Please fill out this field.")
+        utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
+
+    @allure.description('Upload a product incorrectly - Page2, when all the required fields is empty')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_incorrectly8(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['261196', 'Floor', 'BMW', 'BMW-MOTORS', '', '1500'])
+        upload_product.fill_checkbox()
+        upload_product.click_add_new_product_button()
+        '''Page2'''
+        upload_product.enter_data_to_inputs(3, ['', '', ''])
+        upload_product.click_add_new_product_button()
+        utils.validation(upload_product.js_messages_for_all_the_fields(3, 0), "Please fill out this field.")
+        utils.validation(upload_product.js_messages_for_all_the_fields(3, 1), "Please fill out this field.")
+        utils.validation(upload_product.js_messages_for_all_the_fields(3, 2), "Please fill out this field.")
+        utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
+        utils.validation(upload_product.error_message(1), "נא למלא שדה זה")
+        utils.validation(upload_product.error_message(2), "נא למלא שדה זה")
+
+    @allure.description('Upload a product incorrectly - Page2 , when AverageWeight field is empty')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_correctly9(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['261196', 'Asaf', '1', '1', '', '150000'])
+        upload_product.fill_checkbox()
+        upload_product.click_add_new_product_button()
+        '''Page2'''
+        upload_product.filter_products(1)
+        upload_product.enter_data_to_inputs(2, ['', '3'])
+        upload_product.click_add_new_product_button()
+        utils.validation(upload_product.js_messages_for_all_the_fields(2, 0), "Please fill out this field.")
+        utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
+
+    @allure.description('Upload a product incorrectly - Page2 , when Unit of measure field is empty')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_correctly10(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['261196', 'Asaf', '1', '1', '', '150000'])
+        upload_product.fill_checkbox()
+        upload_product.click_add_new_product_button()
+        '''Page2'''
+        upload_product.filter_products(1)
+        upload_product.enter_data_to_inputs(2, ['1', ''])
+        upload_product.click_add_new_product_button()
+        utils.validation(upload_product.js_messages_for_all_the_fields(2, 1), "Please fill out this field.")
+        utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
+
+    @allure.description('Upload a product incorrectly - Page2 , when all the required fields is empty')
+    @allure.severity(allure.severity_level.CRITICAL)
+    def test_upload_product_correctly11(self):
+        driver = self.driver
+        utils = Utils(driver)
+        upload_product = Upload_Product_with_Store(driver)
+        '''Page1'''
+        upload_product.click_add_new_product_section()
+        upload_product.enter_data_to_inputs(6, ['261196', 'Asaf', '1', '1', '', '150000'])
+        upload_product.fill_checkbox()
+        upload_product.click_add_new_product_button()
+        '''Page2'''
+        upload_product.filter_products(1)
+        upload_product.enter_data_to_inputs(2, ['', ''])
+        upload_product.click_add_new_product_button()
+        utils.validation(upload_product.js_messages_for_all_the_fields(2, 0), "Please fill out this field.")
+        utils.validation(upload_product.js_messages_for_all_the_fields(2, 1), "Please fill out this field.")
+        utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
+        utils.validation(upload_product.error_message(1), "נא למלא שדה זה")
