@@ -22,4 +22,3 @@ class ShipPage(CommonQuePage):
         self.clicking_onShipping()
         Util = Utils(self.driver)
         Util.validation(self.shippingTxT, self.assert_txt(self.shipXpath))
-        Util.validation(self.uitxt, self.assert_txt(self.uiX))
