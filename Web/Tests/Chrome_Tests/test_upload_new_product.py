@@ -9,7 +9,7 @@ from Web.Utils.utils import Utils
 """ All the Tests when User Hasn't Store """
 @pytest.mark.usefixtures('login_tsiona')
 class Test_Upload_New_Product0(Pre_Condition):
-
+    @pytest.mark.sanity
     @allure.description('Upload a product incorrectly when the user does not have a store')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_incorrectly_without_store(self):
@@ -224,6 +224,7 @@ class Test_Upload_New_Product0(Pre_Condition):
 """ All the Tests when User has a Store """
 @pytest.mark.usefixtures('login_yosef')
 class Test_Upload_New_Product1(Pre_Condition):
+    @pytest.mark.sanity
     @allure.description('Upload a product correctly when all the fields are full')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_correctly1(self):
@@ -254,6 +255,7 @@ class Test_Upload_New_Product1(Pre_Condition):
         utils.validation(db_query2, '261196')
         utils.validation(db_query3, '15')
 
+    @pytest.mark.sanity
     @allure.description('Upload a product correctly without Image')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_correctly2(self):
@@ -283,6 +285,7 @@ class Test_Upload_New_Product1(Pre_Condition):
         utils.validation(db_query2, '261196')
         utils.validation(db_query3, '15')
 
+    @pytest.mark.sanity
     @allure.description('Upload a product correctly without Image and without Business days')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_correctly3(self):
@@ -309,6 +312,7 @@ class Test_Upload_New_Product1(Pre_Condition):
         utils.validation(db_query2, '261196')
         utils.validation(db_query3, '1500')
 
+    @pytest.mark.sanity
     @allure.description('Upload a product correctly only with the requirements fields')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_correctly4(self):
@@ -335,6 +339,7 @@ class Test_Upload_New_Product1(Pre_Condition):
         utils.validation(db_query2, '261196')
         utils.validation(db_query3, '1500')
 
+    @pytest.mark.sanity
     @allure.description('Upload a product correctly with Weight')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_correctly5(self):
