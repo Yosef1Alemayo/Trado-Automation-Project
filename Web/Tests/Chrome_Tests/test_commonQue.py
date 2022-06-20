@@ -7,11 +7,11 @@ from Web.Utils.PreConditions.precondition import Pre_Condition
 @pytest.mark.usefixtures('login_betty')
 class Test(Pre_Condition):
 
-    @allure.description('Upload a product when the user does not have a store')
-    @allure.severity(allure.severity_level.CRITICAL)
-    def test_moving_to_CommonQuPage(self):
+    @allure.description('Validates moving to "common question page"')
+    @allure.severity(allure.severity_level.MINOR)
+    def test_moving_to_CommonQuestionPage(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validates moving to "common question page" """
         driver = self.driver
         clicking = CommonQuePage(driver)
         clicking.clicking_allLinks()

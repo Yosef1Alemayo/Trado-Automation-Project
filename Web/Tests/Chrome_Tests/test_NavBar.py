@@ -9,13 +9,13 @@ from Web.Locators.NavBar_Locators import NavBarLocators
 class TestNavBer(Pre_Condition):
 
     @allure.severity(allure.severity_level.CRITICAL)
-    @allure.description("Validates links opening correctly")
-    def test_links(self):
+    @allure.description("Validates buttons opening correctly")
+    def test_topBar(self):
 
-        """Validates links opening correctly"""
+        """"Validates buttons opening correctly"""
         driver = self.driver
         headers = NavBarPage(driver)
-        headers.clicking_on_buttons(NavBarLocators.header1,NavBarLocators.list2, NavBarLocators.list_txt2)
+        headers.top_bar_click()
 
     @allure.severity(allure.severity_level.CRITICAL)
     @allure.description("Validates menu buttons opening correctly")
@@ -26,19 +26,12 @@ class TestNavBer(Pre_Condition):
         headers = NavBarPage(driver)
         headers.clicking_on_buttons(NavBarLocators.header2, NavBarLocators.list1, NavBarLocators.list_txt)
 
-    @allure.severity(allure.severity_level.CRITICAL)
-    @allure.description("Validates menu buttons opening correctly")
-    def test_topBar(self):
-
-        """Validates menu buttons opening correctly"""
-        driver = self.driver
-        headers = NavBarPage(driver)
-        headers.top_bar_click()
 
     @allure.severity(allure.severity_level.CRITICAL)
-    @allure.description("Validates menu buttons opening correctly")
+    @allure.description("Validates dataBase match the web page")
     def test_DB(self):
-        """Validates menu buttons opening correctly"""
+
+        """Validates dataBase match the web page"""
         driver = self.driver
         headers = NavBarPage(driver)
         headers.check_in_DB()

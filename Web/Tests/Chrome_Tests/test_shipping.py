@@ -8,10 +8,10 @@ from Web.Utils.PreConditions.precondition import Pre_Condition
 class TestShippingPage(Pre_Condition):
 
     @allure.description('Validating moving into shipping page correctly')
-    @allure.severity(allure.severity_level.CRITICAL)
+    @allure.severity(allure.severity_level.MINOR)
     def test_signin_correctly(self):
 
-        """The Driver And The PreCondition("Login Correctly") - What is the Requirements for ?"""
+        """Validating moving into shipping page correctly"""
         driver = self.driver
         ship = ShipPage(driver)
         ship.moving_to_shippingPage()
