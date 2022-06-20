@@ -22,12 +22,12 @@ class PageArea:
     def Click_Personal_Area(self):
         self.driver.find_element(By.XPATH, self.Personal_area_button).click()
 
-    def enter_first_name(self, first_name):
-        self.driver.find_element(By.XPATH, self.first_name).clear()
-        self.driver.find_element(By.XPATH, self.first_name).send_keys(first_name)
-        # Util = Utils(self.driver)
-        # Util.validation(self.enter_first_name())
-        time.sleep(3)
+    def enter_first_name(self, first_name1):
+        utils = Utils(self.driver)
+        first_name = self.driver.find_element(By.XPATH, self.first_name)
+        first_name.clear()
+        first_name.send_keys(first_name1)
+        utils.validation(first_name.get_attribute('value'), first_name1)
 
     def enter_last_name(self, last_name1):
         utils = Utils(self.driver)
@@ -37,39 +37,41 @@ class PageArea:
         time.sleep(3)
         utils.validation(last_name.get_attribute('value'), last_name1)
 
-    def enter_phone(self, phone):
-        self.driver.find_element(By.XPATH, self.phone).clear()
-        self.driver.find_element(By.XPATH, self.phone).send_keys(phone)
-        # Util = Utils(self.driver)
-        # Util.validation(self.phone)
+    def enter_phone(self, phone1):
+        utils = Utils(self.driver)
+        phone = self.driver.find_element(By.XPATH,self.phone)
+        phone.clear()
+        phone.send_keys(phone1)
+        utils.validation(phone.get_attribute('value'), phone1)
 
-    def enter_email(self, email):
-        self.driver.find_element(By.XPATH, self.email).clear()
-        self.driver.find_element(By.XPATH, self.email).send_keys(email)
+    def enter_email(self, email1):
+        utils = Utils(self.driver)
+        email = self.driver.find_element(By.XPATH,self.email)
+        email.clear()
+        email.send_keys(email1)
+        utils.validation(email.get_attribute('value'), email1)
 
-    def enter_id(self, id):
-        self.driver.find_element(By.XPATH, self.id).clear()
-        self.driver.find_element(By.XPATH, self.id).send_keys(id)
-        # time.sleep(3)
-
-    def enter_city(self, city):
-        self.driver.find_element(By.XPATH, self.city).clear()
-        self.driver.find_element(By.XPATH, self.city).send_keys(city)
-        # time.sleep(3)
-
-    def enter_number(self, number):
-        self.driver.find_element(By.XPATH, self.number).clear()
-        self.driver.find_element(By.XPATH,self.number).send_keys(number)
-        time.sleep(3)
+    def enter_id(self, id1):
+        utils = Utils(self.driver)
+        id = self.driver.find_element(By.XPATH,self.id)
+        id.clear()
+        id.send_keys(id1)
+        utils.validation(id.get_attribute('value'), id1)
 
 
-        # self.driver.execute_script(f"document.getElementsByClassName('input_input ')[2].value = '{number}'")
+    def enter_city(self, city1):
+        utils = Utils(self.driver)
+        city = self.driver.find_element(By.XPATH,self.city)
+        city.clear()
+        city.send_keys(city1)
+        utils.validation(city.get_attribute('value'), city1)
 
-        # self.Select(self.driver.find_element(By.XPATH, number))
-        # select.select_by_index(2)
-
-        # self.driver.find_element(By.XPATH,self.number).send_keys(number)
-        time.sleep(3)
+    def enter_number(self, number1):
+        utils = Utils(self.driver)
+        number = self.driver.find_element(By.XPATH,self.number)
+        number.clear()
+        number.send_keys(number1)
+        utils.validation(number.get_attribute('value'), number1)
 
     def click_Edit_button(self):
         self.driver.find_element(By.XPATH, self.Edit_button).click()

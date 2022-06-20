@@ -1,5 +1,4 @@
 import time
-
 import pytest
 from Web.Pages.searchPage import PageSearch
 from Web.Utils.PreConditions.precondition import Pre_Condition
@@ -10,8 +9,8 @@ class Test2(Pre_Condition):
     def test_1(self):
             driver = self.driver
             ps = PageSearch(driver)
-            ps.search_area("אקדיה ")
-            time.sleep(3)
+            ps.search_area("אקדיה")
+            # time.sleep(7)
 
 
     #Test Product search does not exist
@@ -29,6 +28,6 @@ class Test2(Pre_Condition):
 
     #Test Search with numbers
     def test_4(self):
-        driver = self.driver
-        ps = PageSearch(driver)
-        ps.search_area("1586")
+            driver = self.driver
+            ps = PageSearch(driver)
+            ps.search_area("1586")
