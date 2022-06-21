@@ -6,7 +6,7 @@ from Web.Utils.PreConditions.precondition import Pre_Condition
 from Server.DB.main import query_for_products_details
 from Web.Utils.utils import Utils
 
-""" All the Tests when User Hasn't Store """
+""" All the Tests when User Has no Store """
 @pytest.mark.usefixtures('login_tsiona')
 class Test_Upload_New_Product0(Pre_Condition):
     @pytest.mark.sanity
@@ -409,6 +409,7 @@ class Test_Upload_New_Product1(Pre_Condition):
         upload_product.click_add_new_product_button()
         utils.validation(upload_product.js_messages_for_all_the_fields(6, 5), "Please fill out this field.")
         utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
+
 
     @allure.description('Upload a product incorrectly - Page1, when all the Required field is empty')
     @allure.severity(allure.severity_level.CRITICAL)
