@@ -410,6 +410,7 @@ class Test_Upload_New_Product1(Pre_Condition):
         utils.validation(upload_product.js_messages_for_all_the_fields(6, 5), "Please fill out this field.")
         utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
 
+
     @allure.description('Upload a product incorrectly - Page1, when all the Required field is empty')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_incorrectly4(self):
