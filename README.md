@@ -20,6 +20,7 @@ The system provides management tools, decision making, tracking and alerts when 
 - Nav bar 
 - Search field
 - Personal area 
+- Upload new product
 - Shopping cart
 - Link : Max , Common questions , Contact , How shipping works
 
