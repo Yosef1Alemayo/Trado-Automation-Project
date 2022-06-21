@@ -1,10 +1,10 @@
 import time
 import pytest
 from Web.Pages.searchPage import PageSearch
-from Web.Utils.PreConditions.precondition import Pre_Condition
+from Web.Utils.PreConditions.precondition import Pre_Condition1
 
 @pytest.mark.usefixtures('login_jonathan')
-class Test2(Pre_Condition):
+class Test2(Pre_Condition1):
     #Test search for an existing product
     def test_1(self):
             driver = self.driver
