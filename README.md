@@ -32,5 +32,17 @@ The system provides management tools, decision making, tracking and alerts when 
 
 > Our preconditions for this project is to login to web .
 
+## Type of tests : 
+- Functional 
+- API
+- Data Base
+- Compatibility
+- UI
 
+## Our team 
+
+⚡️Betty Melaku 
+⚡️Tsiona Alemayo 
+⚡️Yosef Alemayo
+⚡️Jonathan Elias
 
