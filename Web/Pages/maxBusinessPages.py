@@ -5,7 +5,7 @@ from Web.Pages.commonQuestion_Page import CommonQuePage
 from Web.Utils.utils import Utils
 
 
-class MaxBussinesPage(CommonQuePage):
+class MaxBusinessPage(CommonQuePage):
 
     def __init__(self, driver):
         super().__init__(driver)
