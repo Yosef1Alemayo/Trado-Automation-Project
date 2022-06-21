@@ -10,6 +10,7 @@ from Web.Utils.utils import Utils
 @pytest.mark.usefixtures('login_tsiona')
 class Test_Upload_New_Product2(Pre_Condition1):
 
+    @pytest.mark.sanity
     @allure.description('Upload a product incorrectly when the user does not have a store')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_incorrectly_without_store(self):
@@ -24,6 +25,7 @@ class Test_Upload_New_Product2(Pre_Condition1):
         driver.implicitly_wait(5)
         utils.validation(upload_product.store_validation_failed_message(), "Store Validation Failed")
 
+    @pytest.mark.regression
     @allure.description('Upload a product incorrectly when the user does not have a store and storeID is null')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_incorrectly_1(self):
@@ -54,6 +56,7 @@ class Test_Upload_New_Product2(Pre_Condition1):
         utils.validation(upload_product.js_messages_for_all_the_fields(1), 'Please fill out this field.')
         utils.validation(upload_product.enter_the_field_message(1), "נא למלא שדה זה")
 
+    @pytest.mark.regression
     @allure.description('Upload a product incorrectly when the user does not have a store and phoneNumber is null')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_incorrectly_3(self):
@@ -69,6 +72,7 @@ class Test_Upload_New_Product2(Pre_Condition1):
         utils.validation(upload_product.js_messages_for_all_the_fields(2), 'Please fill out this field.')
         utils.validation(upload_product.enter_the_field_message(2), "נא למלא שדה זה")
 
+    @pytest.mark.regression
     @allure.description('Upload a product incorrectly when the user does not have a store and email is null')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_incorrectly_4(self):
@@ -224,6 +228,8 @@ class Test_Upload_New_Product2(Pre_Condition1):
 """ All the Tests when User has a Store """
 @pytest.mark.usefixtures('login_yosef')
 class Test_Upload_New_Product3(Pre_Condition1):
+
+    @pytest.mark.sanity
     @allure.description('Upload a product correctly when all the fields are full')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_correctly1(self):
@@ -254,6 +260,7 @@ class Test_Upload_New_Product3(Pre_Condition1):
         utils.validation(db_query2, '261196')
         utils.validation(db_query3, '15')
 
+    @pytest.mark.sanity
     @allure.description('Upload a product correctly without Image')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_correctly2(self):
@@ -283,6 +290,7 @@ class Test_Upload_New_Product3(Pre_Condition1):
         utils.validation(db_query2, '261196')
         utils.validation(db_query3, '15')
 
+    @pytest.mark.sanity
     @allure.description('Upload a product correctly without Image and without Business days')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_correctly3(self):
@@ -309,6 +317,7 @@ class Test_Upload_New_Product3(Pre_Condition1):
         utils.validation(db_query2, '261196')
         utils.validation(db_query3, '1500')
 
+    @pytest.mark.sanity
     @allure.description('Upload a product correctly only with the requirements fields')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_correctly4(self):
@@ -335,6 +344,7 @@ class Test_Upload_New_Product3(Pre_Condition1):
         utils.validation(db_query2, '261196')
         utils.validation(db_query3, '1500')
 
+    @pytest.mark.sanity
     @allure.description('Upload a product correctly with Weight')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_correctly5(self):
@@ -388,6 +398,7 @@ class Test_Upload_New_Product3(Pre_Condition1):
         utils.validation(upload_product.js_messages_for_all_the_fields(6, 1), "Please fill out this field.")
         utils.validation(upload_product.error_message(0), "נא למלא שדה זה")
 
+    @pytest.mark.regression
     @allure.description('Upload a product incorrectly - Page1, when Price field is empty')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_incorrectly3(self):
@@ -418,6 +429,7 @@ class Test_Upload_New_Product3(Pre_Condition1):
         utils.validation(upload_product.error_message(1), "נא למלא שדה זה")
         utils.validation(upload_product.error_message(2), "נא למלא שדה זה")
 
+    @pytest.mark.regression
     @allure.description('Upload a product incorrectly - Page2, when cartonAmount field is empty')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_incorrectly5(self):
@@ -490,6 +502,7 @@ class Test_Upload_New_Product3(Pre_Condition1):
         utils.validation(upload_product.error_message(1), "נא למלא שדה זה")
         utils.validation(upload_product.error_message(2), "נא למלא שדה זה")
 
+    @pytest.mark.regression
     @allure.description('Upload a product incorrectly - Page2 , when AverageWeight field is empty')
     @allure.severity(allure.severity_level.CRITICAL)
     def test_upload_product_correctly9(self):
