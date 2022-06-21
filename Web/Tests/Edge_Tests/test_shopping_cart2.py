@@ -1,13 +1,13 @@
 import allure
 import pytest
-from Web.Utils.PreConditions.precondition import Pre_Condition
+from Web.Utils.PreConditions.precondition import Pre_Condition1
 from Web.Utils.utils import Utils
 from Web.Pages.shopping_Cart_Page import ShoppingCartPage
 from Server.DB.main import *
 
 
 @pytest.mark.usefixtures('login_tsiona')
-class TestShoppingCart(Pre_Condition):
+class TestShoppingCart(Pre_Condition1):
 
     @pytest.mark.regression
     @pytest.mark.sanity
