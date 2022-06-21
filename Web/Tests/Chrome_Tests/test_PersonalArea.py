@@ -1,4 +1,5 @@
 import time
+import allure
 import pytest
 from Web.Pages.personalAreaPage import PageArea
 from Web.Utils.PreConditions.precondition import Pre_Condition
@@ -7,7 +8,9 @@ from Web.Utils.utils import Utils
 
 @pytest.mark.usefixtures('login_jonathan')
 class Test1(Pre_Condition):
-    #Test when all fields are valid
+    @pytest.mark.sanity
+    @allure.description('Test when all fields are valid')
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_1(self):
             driver = self.driver
             pa = PageArea(driver)
@@ -23,7 +26,9 @@ class Test1(Pre_Condition):
             pa.click_Save_button()
 
 
-# Test when all fields are empty
+
+    @allure.description('Test when all fields are empty')
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_2(self):
             driver = self.driver
             pa = PageArea(driver)
@@ -39,8 +44,9 @@ class Test1(Pre_Condition):
             pa.click_Save_button()
 
 
-#Test when no first name is entered in the field
 
+    @allure.description('Test when no first name is entered in the field')
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_3(self):
             driver = self.driver
             pa = PageArea(driver)
@@ -55,7 +61,11 @@ class Test1(Pre_Condition):
             pa.enter_city('Holon')
             pa.click_Save_button()
 
-# Test when no last name is entered in the field
+
+
+
+    @allure.description('Test when no last name is entered in the field')
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_4(self):
             driver = self.driver
             pa = PageArea(driver)
@@ -70,8 +80,12 @@ class Test1(Pre_Condition):
             pa.enter_city('Holon')
             pa.click_Save_button()
 
-#Test when not putting a phone in the field
 
+
+
+
+    @allure.description('Test when not putting a phone in the field')
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_5(self):
             driver = self.driver
             pa = PageArea(driver)
@@ -87,7 +101,11 @@ class Test1(Pre_Condition):
             pa.click_Save_button()
 
 
-#Test when no id is entered in the field
+
+
+
+    @allure.description('Test when no id is entered in the field')
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_6(self):
             driver = self.driver
             pa = PageArea(driver)
@@ -102,7 +120,12 @@ class Test1(Pre_Condition):
             pa.enter_city('Holon')
             pa.click_Save_button()
 
-# Test when not entering a street number in the field
+
+
+
+
+    @allure.description(' Test when not entering a street number in the field')
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_7(self):
             driver = self.driver
             pa = PageArea(driver)
@@ -117,7 +140,12 @@ class Test1(Pre_Condition):
             pa.enter_city('Holon')
             pa.click_Save_button()
 
-# Test when not entering a city in the field
+
+
+
+
+    @allure.description('Test when not entering a city in the field')
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_8(self):
             driver = self.driver
             pa = PageArea(driver)
@@ -133,7 +161,13 @@ class Test1(Pre_Condition):
             pa.click_Save_button()
 
 
-# Test when email is not entered in the field
+
+
+
+
+
+    @allure.description('Test when email is not entered in the field')
+    @allure.severity(allure.severity_level.CRITICAL)
     def test_9(self):
             driver = self.driver
             pa = PageArea(driver)
