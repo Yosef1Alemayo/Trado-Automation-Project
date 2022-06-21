@@ -7,6 +7,7 @@ from Web.Utils.PreConditions.precondition import Pre_Condition
 @pytest.mark.usefixtures('login_betty')
 class TestShippingPage(Pre_Condition):
 
+    @pytest.mark.nightly_build
     @allure.description('Validating moving into shipping page correctly')
     @allure.severity(allure.severity_level.MINOR)
     def test_signin_correctly(self):

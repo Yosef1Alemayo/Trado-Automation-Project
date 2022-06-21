@@ -7,6 +7,7 @@ from Web.Utils.PreConditions.precondition import Pre_Condition
 @pytest.mark.usefixtures('login_betty')
 class Test(Pre_Condition):
 
+    @pytest.mark.sanity
     @allure.description('Validates moving to "common question page"')
     @allure.severity(allure.severity_level.MINOR)
     def test_moving_to_CommonQuestionPage(self):
