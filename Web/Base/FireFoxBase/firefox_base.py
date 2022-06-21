@@ -2,13 +2,14 @@ import pytest
 from selenium import webdriver
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 
-class Base_Edge:
+class Base_FireFox:
     @pytest.fixture(autouse=True)
-    def set_up_edge(self):
+    def set_up_firefox(self):
         print('\n----------------------')
-        print('Initialing Edge Driver')
+        print('Initialing FireFox Driver')
         print('-------------------------')
-        self.driver = webdriver.Edge(EdgeChromiumDriverManager().install())
+        self.driver = webdriver.Firefox(executable_path='C:/Users/yossi/Desktop/Python-Project/Trado-Automation-Project'
+                                                        '/Web/Drivers/geckodriver.exe')
         print('\n----------------------')
         print('Test is Started')
         print('------------------------')

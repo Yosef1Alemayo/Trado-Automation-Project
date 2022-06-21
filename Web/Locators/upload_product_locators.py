@@ -3,7 +3,7 @@ class Upload_New_Product_Locators:
     ADD_PRODUCT_PAGE = 'div[class="addProduct_page"]'
     NEW_PRODUCT_FIELDS = 'input[class="add_product_page_form_item"]'
     ADD_NEW_PRODUCT_BUTTON = 'input[class="form_submitBtn"]'
-    ADD_NEW_PRODUCT_SECTION = 'span[class="verticalMenu_AddProductBtn"]'
+    ADD_NEW_PRODUCT_SECTION = 'a[class="verticalMenu_addProduct"]'
     IMAGE = "//input[@id='files']"
     # Xpath:
     CHECKBOX = '//div[1]/div[2]/div[3]/div[1]/input[1]'

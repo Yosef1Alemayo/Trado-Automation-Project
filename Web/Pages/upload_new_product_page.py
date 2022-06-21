@@ -22,6 +22,7 @@ class Upload_New_Product_Page:
     def click_add_new_product_section(self):
         wait = WebDriverWait(self.driver, 20)
         wait.until(EC.presence_of_element_located((By.CSS_SELECTOR, self.addNewProductSection)))
+        wait.until(EC.element_to_be_clickable((By.CSS_SELECTOR, self.addNewProductSection)))
         self.driver.find_element(By.CSS_SELECTOR, self.addNewProductSection).click()
         div = self.driver.find_element(By.CSS_SELECTOR, self.addProductPage)
         wait.until(EC.visibility_of(div))

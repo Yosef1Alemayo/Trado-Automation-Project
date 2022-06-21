@@ -6,7 +6,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 from Server.DB.main import query_for_login_code
 from Web.Utils.PreConditions.pre_conditions_locators import PreCondition_Locators
 from Web.Base.ChromeBase.chrome_base import Base_Chrome
-from Web.Base.EdgeBase.edge_base import Base_Edge
+from Web.Base.FireFoxBase.firefox_base import Base_FireFox
 from Web.Utils.utils import Utils
 
 class Pre_Condition(Base_Chrome):
@@ -108,7 +108,7 @@ class Pre_Condition(Base_Chrome):
         self.enter_sms_code(sms)
         self.click_connect()
 
-class Pre_Condition1(Base_Edge):
+class Pre_Condition1(Base_FireFox):
     def click_restaurants(self):
         wait = WebDriverWait(self.driver, 20)
         wait.until(EC.presence_of_element_located((By.XPATH, PreCondition_Locators.RESTAURANTS)))
@@ -150,9 +150,9 @@ class Pre_Condition1(Base_Edge):
             place.send_keys(digit)
             utils.validation(place.get_attribute('value'), digit)
 
-    @pytest.mark.usefixtures('set_up_edge')
+    @pytest.mark.usefixtures('set_up_firefox')
     @pytest.fixture
-    def login_tsiona(self, set_up_edge):
+    def login_tsiona(self, set_up_firefox):
         self.click_restaurants()
         self.click_cocktails()
         self.click_save_button()
@@ -164,9 +164,9 @@ class Pre_Condition1(Base_Edge):
         self.enter_sms_code(sms)
         self.click_connect()
 
-    @pytest.mark.usefixtures('set_up_edge')
+    @pytest.mark.usefixtures('set_up_firefox')
     @pytest.fixture
-    def login_yosef(self, set_up_edge):
+    def login_yosef(self, set_up_firefox):
         self.click_restaurants()
         self.click_cocktails()
         self.click_save_button()
@@ -178,9 +178,9 @@ class Pre_Condition1(Base_Edge):
         self.enter_sms_code(sms)
         self.click_connect()
 
-    @pytest.mark.usefixtures('set_up_edge')
+    @pytest.mark.usefixtures('set_up_firefox')
     @pytest.fixture
-    def login_betty(self, set_up_edge):
+    def login_betty(self, set_up_firefox):
         self.click_restaurants()
         self.click_cocktails()
         self.click_save_button()
@@ -192,9 +192,9 @@ class Pre_Condition1(Base_Edge):
         self.enter_sms_code(sms)
         self.click_connect()
 
-    @pytest.mark.usefixtures('set_up_edge')
+    @pytest.mark.usefixtures('set_up_firefox')
     @pytest.fixture
-    def login_jonathan(self, set_up_edge):
+    def login_jonathan(self, set_up_firefox):
         self.click_restaurants()
         self.click_cocktails()
         self.click_save_button()
