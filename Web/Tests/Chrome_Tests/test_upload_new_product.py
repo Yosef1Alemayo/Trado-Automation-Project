@@ -6,7 +6,7 @@ from Web.Utils.PreConditions.precondition import Pre_Condition
 from Server.DB.main import query_for_products_details
 from Web.Utils.utils import Utils
 
-""" All the Tests when User Has no Store """
+""" All the Tests when User Hasn't Store """
 @pytest.mark.usefixtures('login_tsiona')
 class Test_Upload_New_Product0(Pre_Condition):
     @pytest.mark.sanity
